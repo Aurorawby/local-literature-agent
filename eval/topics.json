@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-10-28",
+    "purpose": "检索层 A/B 评测：验证'换学术源 + 检索式规划 + 相关性硬约束'是否真的提升相关论文命中率",
+    "labeling": "人工定义 core_terms（核心概念）与 domain_terms（应用领域）。一篇论文算 on-topic 当且仅当标题或摘要同时命中至少一个 core_term 和至少一个 domain_term（英文小写子串匹配）。",
+    "caveat": "这是关键词代理指标，不是人工逐篇标注；结论用于同条件间对比，不宣称绝对准确率。"
+  },
+  "topics": [
+    {
+      "id": "llm_finance",
+      "topic": "大语言模型在金融风控中的应用",
+      "core_terms": ["large language model", "llm", "gpt", "transformer"],
+      "domain_terms": ["credit risk", "financial risk", "fraud", "banking", "finance"]
+    },
+    {
+      "id": "esg",
+      "topic": "ESG 投资与企业绩效",
+      "core_terms": ["esg", "environmental social governance", "sustainability"],
+      "domain_terms": ["firm performance", "financial performance", "investment", "corporate"]
+    },
+    {
+      "id": "intl_finance",
+      "topic": "国际金融风险传导",
+      "core_terms": ["international finance", "cross-border", "global financial"],
+      "domain_terms": ["risk spillover", "contagion", "systemic risk", "transmission", "shock"]
+    },
+    {
+      "id": "supply_chain",
+      "topic": "供应链韧性",
+      "core_terms": ["supply chain resilience", "supply chain"],
+      "domain_terms": ["disruption", "risk management", "covid", "supplier", "recovery"]
+    },
+    {
+      "id": "solid_battery",
+      "topic": "固态电池界面稳定性",
+      "core_terms": ["solid-state battery", "solid electrolyte", "solid state battery"],
+      "domain_terms": ["interface", "lithium", "dendrite", "stability", "anode"]
+    },
+    {
+      "id": "medical_seg",
+      "topic": "医学影像分割的深度学习方法",
+      "core_terms": ["medical image segmentation", "image segmentation", "deep learning"],
+      "domain_terms": ["ct", "mri", "tumor", "lesion", "medical image"]
+    },
+    {
+      "id": "edu_llm",
+      "topic": "大语言模型在教育中的应用",
+      "core_terms": ["large language model", "llm", "chatgpt", "generative ai"],
+      "domain_terms": ["education", "student", "learning", "teaching", "classroom"]
+    },
+    {
+      "id": "data_market",
+      "topic": "数据要素市场化",
+      "core_terms": ["data element", "data market", "data governance", "data trading"],
+      "domain_terms": ["china", "marketization", "policy", "data pricing", "data property"]
+    },
+    {
+      "id": "carbon",
+      "topic": "碳中和政策对企业的影响",
+      "core_terms": ["carbon neutrality", "carbon policy", "carbon emission", "carbon neutrality target"],
+      "domain_terms": ["firm", "corporate", "enterprise", "industry", "company"]
+    },
+    {
+      "id": "chip",
+      "topic": "先进制程芯片制造与出口管制",
+      "core_terms": ["semiconductor", "advanced node", "chip manufacturing", "lithography"],
+      "domain_terms": ["export control", "supply chain", "china", "technology", "sanction"]
+    }
+  ]
+}

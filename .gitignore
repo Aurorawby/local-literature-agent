@@ -1,0 +1,43 @@
+﻿# 本地环境与缓存
+.venv/
+.tmp/
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# 构建产物
+build/
+dist/
+*.egg-info/
+
+# 密钥与本地配置（.env.example 要提交，.env 不要）
+.env
+
+# 本地运行结果（样例已复制到 portfolio/demos/）
+output/
+
+# 用户测试原始数据（含被试记录，不提交）
+user_test/results/
+
+# 论文 PDF（版权原因不提交，只保留说明文件）
+papers/*.pdf
+papers/*.caj
+
+# 个人求职材料（含联系方式，不发布）
+*.docx
+~$*
+发布到GitHub-手把手.md
+个人文件/
+发布包/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.idea/
+.vscode/
+
+db.sqlite3

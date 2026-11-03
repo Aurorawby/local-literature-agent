@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-10-28",
+    "purpose": "检索层 A/B 评测：验证'换学术源 + 检索式规划 + 相关性硬约束'是否真的提升相关论文命中率",
+    "labeling": "人工定义 core_terms（核心概念）与 domain_terms（应用领域）。一篇论文算 on-topic 当且仅当标题或摘要同时命中至少一个 core_term 和至少一个 domain_term（英文小写子串匹配）。",
+    "caveat": "这是关键词代理指标，不是人工逐篇标注；结论用于同条件间对比，不宣称绝对准确率。"
+  },
+  "config": {
+    "per_query": 10,
+    "top_k": 10
+  },
+  "summary": {
+    "topics": 3,
+    "conditions": {
+      "b0": {
+        "precision@10": 3.3,
+        "core@10": 13.3,
+        "domain@10": 20.0
+      },
+      "b1": {
+        "precision@10": 60.0,
+        "core@10": 73.3,
+        "domain@10": 76.7
+      },
+      "b2": {
+        "precision@10": 46.7,
+        "core@10": 73.3,
+        "domain@10": 73.3
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "supply_chain",
+      "topic": "供应链韧性",
+      "queries": [
+        "supply chain resilience",
+        "resilient supply chain logistics",
+        "logistics resilience"
+      ],
+      "candidates": {
+        "b0": 16,
+        "pipeline": 86
+      },
+      "elapsed_s": 32.1,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "core@10": 30.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 90.0,
+        "core@10": 90.0,
+        "domain@10": 100.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 60.0,
+        "core@10": 80.0,
+        "domain@10": 80.0
+      },
+      "b2_titles": [
+        "Inherent and adaptive resilience of logistics operations in food supply chains",
+        "A systematic literature review of infrastructure resilience in humanitarian logistics: inf",
+        "Logistics and Supply Chain Resilience of Japanese Companies: Perspectives from Impacts of ",
+        "From Green Supply Chain Management to Supply Chain Viability: The Mediating Role of Supply",
+        "The Impacts of Product Architecture and Logistics Techniques on Supply Chain Resilience an",
+        "Willingness to Implement Logistics and Supply Chain Resilience Strategies Amid COVID-19: I",
+        "The impact of supply chain transparency and supply chain resilience on supply chain risk m",
+        "Resilient Routing: Risk-Aware Dynamic Routing in Smart Logistics via Spatiotemporal Graph ",
+        "Artificial intelligence-driven improvement of hospital logistics management resilience: a ",
+        "Improving a Hybrid Graphsage Deep Network for Automatic Multi-objective Logistics Manageme"
+      ],
+      "b1_titles": [
+        "The impact of supply chain transparency and supply chain resilience on supply chain risk m",
+        "Whose resilience matters? Addressing issues of scale in supply chain resilience",
+        "Inherent and adaptive resilience of logistics operations in food supply chains",
+        "Optimizing Resilient Sustainable Citrus Supply Chain Design",
+        "A systematic literature review of infrastructure resilience in humanitarian logistics: inf",
+        "Logistics and Supply Chain Resilience of Japanese Companies: Perspectives from Impacts of ",
+        "Analyzing Airline Fleet Resilience Using the Disruption Funnel Framework",
+        "From Green Supply Chain Management to Supply Chain Viability: The Mediating Role of Supply",
+        "The Impacts of Product Architecture and Logistics Techniques on Supply Chain Resilience an",
+        "Willingness to Implement Logistics and Supply Chain Resilience Strategies Amid COVID-19: I"
+      ],
+      "b2_core_hits": [
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        }
+      ],
+      "b1_core_hits": [
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        }
+      ]
+    },
+    {
+      "id": "solid_battery",
+      "topic": "固态电池界面稳定性",
+      "queries": [
+        "solid state battery interface stability",
+        "interface stability solid state batteries",
+        "solid state battery interface properties"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 65
+      },
+      "elapsed_s": 30.1,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 10.0,
+        "core@10": 10.0,
+        "domain@10": 60.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 60.0,
+        "core@10": 60.0,
+        "domain@10": 100.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 40.0,
+        "core@10": 40.0,
+        "domain@10": 100.0
+      },
+      "b2_titles": [
+        "Interface Properties of Artificial Solid Electrolyte Layer on Li-Metal Anode for Quasi-Sol",
+        "Controlling moving interfaces in solid state batteries",
+        "DFT Modelling of Explicit Solid-Solid Interfaces in Batteries: Methods and Challenges",
+        "Surface Morphology and Electrochemical Behavior of Microstructured Cu Electrodes in All-So",
+        "Interfacial performance evolution of ceramics-in-polymer composite electrolyte in solid-st",
+        "Halide solid-state electrolytes for all-solid-state batteries: structural design, synthesi",
+        "A Review of Polymer‐based Solid‐State Electrolytes for Lithium‐Metal Batteries: Structure,",
+        "The Indium−Lithium Electrode in Solid‐State Lithium‐Ion Batteries: Phase Formation, Redox ",
+        "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte and Sodium Metal Anode for Qua",
+        "Li7La3Zr2O12-co-LiNbO3 Surface Modification Improves the Interface Stability between Catho"
+      ],
+      "b1_titles": [
+        "Halide solid-state electrolytes for all-solid-state batteries: structural design, synthesi",
+        "A Review of Polymer‐based Solid‐State Electrolytes for Lithium‐Metal Batteries: Structure,",
+        "The Indium−Lithium Electrode in Solid‐State Lithium‐Ion Batteries: Phase Formation, Redox ",
+        "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte and Sodium Metal Anode for Qua",
+        "Li7La3Zr2O12-co-LiNbO3 Surface Modification Improves the Interface Stability between Catho",
+        "AES lithium chemical mapping in buried interface of all‐solid‐state battery materials",
+        "Autonomous disulfide-crosslinked PEGDA solid polymer electrolyte for self-healing lithium-",
+        "Electrochemical stability and lithium insertion at the Li|Li3OCl solid electrolyte interfa",
+        "Synergistic Interface Stability and High Room-Temperature Ionic Conductivity for Wide-Temp",
+        "Interface Engineering in Solid‐State Sodium Batteries: Advances in Materials Design, Inter"
+      ],
+      "b2_core_hits": [
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        }
+      ],
+      "b1_core_hits": [
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": true,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        }
+      ]
+    },
+    {
+      "id": "data_market",
+      "topic": "数据要素市场化",
+      "queries": [
+        "data element market",
+        "data market mechanism",
+        "data trading platform"
+      ],
+      "candidates": {
+        "b0": 19,
+        "pipeline": 88
+      },
+      "elapsed_s": 25.4,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "core@10": 0.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 30.0,
+        "core@10": 70.0,
+        "domain@10": 30.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 40.0,
+        "core@10": 100.0,
+        "domain@10": 40.0
+      },
+      "b2_titles": [
+        "Data-Factor Marketization and Corporate Green Development Performance: Evidence from China",
+        "The impacts of data trading platform on residents' cultural consumption",
+        "Data Elements and Enterprise Supply Chain Resilience: Evidence from a Quasi-Natural Experi",
+        "The Influence Mechanism of Data Market Regulation and New Quality Productivity on Innovati",
+        "Data on the Move: Traffic-Oriented Data Trading Platform Powered by AI Agent with Common S",
+        "Data Collection and Trading Strategy Analysis of Stackelberg-Based Vehicle Crowd-Sensing P",
+        "Privacy-protected crowd-sensed data trading algorithm",
+        "An Incentive Mechanism for Trading Personal Data in Data Markets",
+        "BDTF: A Blockchain-Based Data Trading Framework with Trusted Execution Environment",
+        "Online Pricing with Reserve Price Constraint for Personal Data Markets"
+      ],
+      "b1_titles": [
+        "Data element investment strategy: How can leaders and followers innovate in dynamic market",
+        "Exploring the impact of data element market development on supply chain network configurat",
+        "AI Risk Bonds: a market-based mechanism for governing liability",
+        "Data Elements and Trustworthy Circulation: A Clearing and Settlement Architecture for Elem",
+        "Pharmaceutical Data and Market Exclusivity: Mechanism and Enforceability of Regulatory Exc",
+        "Data-Factor Marketization and Corporate Green Development Performance: Evidence from China",
+        "The impacts of data trading platform on residents' cultural consumption",
+        "Does communication increase investors’ trading frequency? Evidence from a Chinese social t",
+        "Data Collection and Trading Strategy Analysis of Stackelberg-Based Vehicle Crowd-Sensing P",
+        "Data Elements and Enterprise Supply Chain Resilience: Evidence from a Quasi-Natural Experi"
+      ],
+      "b2_core_hits": [
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        }
+      ],
+      "b1_core_hits": [
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": false,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        },
+        {
+          "core": false,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": false,
+          "both": false
+        },
+        {
+          "core": true,
+          "domain": true,
+          "both": true
+        }
+      ]
+    }
+  ]
+}

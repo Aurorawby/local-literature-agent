@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Literature Agent · 本地文献 Agent</title>
+<meta name="description" content="一个跑在笔记本上的中文学术文献 Agent：检索、精读、综述、引用核验、论文对话。">
+<style>
+  :root{
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#ffffff;
+    --accent:#2563eb; --accent-soft:#eff6ff;
+    --green:#059669; --green-soft:#ecfdf5;
+    --amber:#b45309; --amber-soft:#fffbeb;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+  nav{
+    position:sticky; top:0; z-index:10; backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.86); border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:60px}
+  nav .brand{font-weight:700; font-size:15px}
+  nav .links{display:flex; gap:20px; font-size:14px}
+  nav .links a{color:var(--muted)}
+  nav .links a:hover{color:var(--accent); text-decoration:none}
+
+  header{padding:72px 0 40px}
+  .tag{
+    display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--accent);
+    background:var(--accent-soft); border:1px solid #bfdbfe; padding:5px 12px; border-radius:999px;
+  }
+  h1{font-size:44px; line-height:1.2; margin:18px 0 12px; letter-spacing:-.02em}
+  .lede{font-size:17px; color:var(--muted); max-width:760px; margin:0}
+  .lede b{color:var(--ink)}
+  .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px}
+  .btn{
+    display:inline-block; padding:11px 20px; border-radius:10px; font-size:14.5px; font-weight:600;
+    border:1px solid var(--line); color:var(--ink); background:#fff;
+  }
+  .btn:hover{text-decoration:none; border-color:#94a3b8}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+  .btn.primary:hover{background:#1d4ed8}
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:44px 0 0}
+  .stat{border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; background:#fff}
+  .stat .num{font-size:28px; font-weight:700; letter-spacing:-.02em}
+  .stat .lbl{font-size:12.5px; color:var(--muted); margin-top:4px}
+
+  section{padding:64px 0; border-top:1px solid var(--line)}
+  h2{font-size:26px; margin:0 0 8px; letter-spacing:-.01em}
+  .sub{color:var(--muted); margin:0 0 28px; font-size:15px}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+  .card{border:1px solid var(--line); border-radius:var(--radius); padding:20px; background:#fff}
+  .card h3{font-size:15.5px; margin:0 0 8px}
+  .card p{margin:0; font-size:13.8px; color:var(--muted)}
+  .card .k{font-size:12px; color:var(--accent); font-weight:600; margin-bottom:6px}
+
+  .flow{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+  .flow .step{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:#f8fafc}
+  .flow .step .n{font-size:12px; color:var(--muted); font-weight:600}
+  .flow .step .t{font-weight:600; margin:4px 0 6px; font-size:14.5px}
+  .flow .step .d{font-size:12.8px; color:var(--muted)}
+
+  .arch{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff}
+  .arch img{display:block; width:100%; height:auto}
+
+  .decisions{display:grid; gap:14px}
+  .decision{display:grid; grid-template-columns:52px 1fr; gap:16px; border:1px solid var(--line); border-radius:var(--radius); padding:18px}
+  .decision .idx{font-size:20px; font-weight:700; color:var(--accent)}
+  .decision h3{margin:0 0 6px; font-size:15.5px}
+  .decision p{margin:0; font-size:13.8px; color:var(--muted)}
+  .decision .lesson{margin-top:8px; font-size:13px; color:var(--green); background:var(--green-soft); border-radius:8px; padding:8px 10px}
+
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line)}
+  th{font-size:12.5px; color:var(--muted); font-weight:600; background:#f8fafc}
+  td b{color:var(--ink)}
+
+  .demos{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+  .demo{border:1px solid var(--line); border-radius:var(--radius); padding:18px; background:#fff}
+  .demo .type{font-size:11.5px; color:var(--amber); background:var(--amber-soft); border-radius:999px; padding:3px 10px; display:inline-block}
+  .demo h3{font-size:15px; margin:10px 0 6px}
+  .demo p{font-size:13.2px; color:var(--muted); margin:0}
+
+  .chips{display:flex; flex-wrap:wrap; gap:10px}
+  .chip{font-size:13px; padding:7px 14px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:#fff}
+
+  footer{border-top:1px solid var(--line); padding:40px 0 60px; color:var(--muted); font-size:13.5px}
+  footer .row{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
+
+  @media (max-width:860px){
+    h1{font-size:32px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .grid3,.flow,.demos{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+    nav .links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">📚 Local Literature Agent</div>
+    <div class="links">
+      <a href="#problem">问题</a>
+      <a href="#solution">方案</a>
+      <a href="#decisions">取舍</a>
+      <a href="#data">数据</a>
+      <a href="#demos">样例</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap">
+  <span class="tag">AI 产品 / Agent 作品 · LangGraph + Ollama · 本地优先</span>
+  <h1>把「读一个领域的文献」<br>从几天压缩到一小时</h1>
+  <p class="lede">
+    一个跑在笔记本上的中文学术文献 Agent：检索 <b>Crossref / DOAJ / arXiv</b>，
+    逐篇结构化精读，生成带 <b>DOI 参考文献</b>的中文综述，
+    并用<b>确定性检查</b>告诉你哪些引用和数字需要人工核对。
+    支持<b>围绕论文连续提问</b>、<b>跨文献对比</b>、<b>提炼可写进论文的观点</b>。
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="#demos">看样例产出</a>
+    <a class="btn" href="portfolio/case-study.md">读产品案例</a>
+    <a class="btn" href="README.md">技术说明</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">6 分钟</div><div class="lbl">一次综述（8 篇精读，纯 CPU）</div></div>
+    <div class="stat"><div class="num">6% → 57.5%</div><div class="lbl">10 主题 A/B：检索式规划前 / 后 Precision@10</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lbl">引用结构正确性（下限保证，非质量分）</div></div>
+    <div class="stat"><div class="num">11 项</div><div class="lbl">环境自检全部通过</div></div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <h2>问题：AI 搜索给的是网页，不是文献</h2>
+    <p class="sub">"读文献"其实是 5 个任务，市面产品大多只解决 1 个。</p>
+    <div class="grid3">
+      <div class="card"><div class="k">① 找</div><h3>搜不准</h3><p>通用 AI 搜索返回新闻、百科、SEO 垃圾；搜"国际金融"甚至会返回词典页。</p></div>
+      <div class="card"><div class="k">② 读</div><h3>读不完</h3><p>一个方向几百篇论文，粗读一遍要几天；读完也记不住谁用什么方法。</p></div>
+      <div class="card"><div class="k">③ 比</div><h3>不会比</h3><p>单篇问答产品很成熟，但"这几篇的结论分歧在哪"没有工具支持。</p></div>
+      <div class="card"><div class="k">④ 写</div><h3>写不出</h3><p>综述需要观点 + 出处 + 对比；让模型写往往变成泛泛而谈。</p></div>
+      <div class="card"><div class="k">⑤ 核</div><h3>核不了</h3><p>模型会编造引用和数字，没有工具告诉你哪句需要回原文核对。</p></div>
+      <div class="card"><div class="k">机会</div><h3>空档在 ①③④⑤</h3><p>② 已经不是问题，"找 + 比 + 写 + 核"才是。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="wrap">
+    <h2>方案：一条流水线，四个入口</h2>
+    <p class="sub">统一跑在本地 Ollama 上（免费、数据不出本机），界面里可一键切换 DeepSeek / OpenAI / 通义。</p>
+    <div class="arch"><img src="portfolio/architecture.svg" alt="系统架构图"></div>
+
+    <div class="flow" style="margin-top:24px">
+      <div class="step"><div class="n">01</div><div class="t">规划检索式</div><div class="d">中文主题 → 英文学术检索式 + 核心概念 + 领域词</div></div>
+      <div class="step"><div class="n">02</div><div class="t">多源检索</div><div class="d">Crossref / DOAJ / arXiv，去重 + 相关性打分</div></div>
+      <div class="step"><div class="n">03</div><div class="t">结构化精读</div><div class="d">每篇压成问题/方法/数据/发现/局限五要素卡片</div></div>
+      <div class="step"><div class="n">04</div><div class="t">综述 + 核验</div><div class="d">主题化中文综述 + DOI 参考文献 + 编号/数字回查</div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:28px">
+      <div class="card"><div class="k">能力 1</div><h3>文献综述</h3><p>输入一个主题，输出中文综述初稿、对比表、带 DOI 的参考文献和核验指标。</p></div>
+      <div class="card"><div class="k">能力 2</div><h3>单篇精读</h3><p>PDF / arXiv / DOI → 结构化中文笔记（问题/方法/数据/结果/局限/启发）。</p></div>
+      <div class="card"><div class="k">能力 3</div><h3>论文对话</h3><p>围绕一篇论文连续提问；一键提炼"可写进论文的观点"，原文依据由程序回填。</p></div>
+      <div class="card"><div class="k">能力 4</div><h3>文献库对话</h3><p>多篇论文跨文献问答、生成对比表、找它们共同没有解决的问题。</p></div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="arch"><img src="portfolio/screenshots/01-文献综述.png" alt="文献综述界面"></div>
+      <div class="arch"><img src="portfolio/screenshots/03-论文对话.png" alt="论文对话界面"></div>
+      <div class="arch"><img src="portfolio/screenshots/02-单篇精读.png" alt="单篇精读界面"></div>
+      <div class="arch"><img src="portfolio/screenshots/04-文献库.png" alt="文献库界面"></div>
+    </div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="wrap">
+    <h2>七个关键取舍</h2>
+    <p class="sub">这些决定了产品能不能用、指标能不能信、结论能不能被证伪。</p>
+    <div class="decisions">
+      <div class="decision">
+        <div class="idx">01</div>
+        <div>
+          <h3>换数据源，而不是优化提示词</h3>
+          <p>第一版沿用网页搜索，搜"国际金融"返回词典页——不是模型不行，是数据源不对。换成学术库后，
+             同样的问题才第一次出现真正的期刊论文。</p>
+          <div class="lesson">检索质量是生成质量的上限，提示词救不了错的数据源。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">02</div>
+        <div>
+          <h3>加相关性硬约束，而不是相信模型</h3>
+          <p>模型会把主题词丢掉（"大语言模型在金融风控" → 只搜 financial risk）。三层兜底：
+             提示词要求 + 代码补全 + 打分惩罚，完全不提核心概念的论文直接淘汰。</p>
+          <div class="lesson">指令依从性不可靠时，用代码兜底，而不是反复改提示词。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">03</div>
+        <div>
+          <h3>不做"模型自评"，只做"规则可算"</h3>
+          <p>让 3B 模型判断"引用是否有依据"，同一稿跑两次从 33.3% 变成 27.3%。
+             最终主指标换成确定性检查：编号有效性、数字回查、引用覆盖；语义抽检降级为参考。</p>
+          <div class="lesson">不可复现的指标比没有指标更危险——它会误导用户，也误导迭代方向。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">04</div>
+        <div>
+          <h3>论文对话不上向量库</h3>
+          <p>一篇论文只有几十个片段，BM25 足够且结果可复现、可核对页码；中文提问先转英文关键词再检索。</p>
+          <div class="lesson">先判断问题规模：几十个片段的场景，embedding + 向量库是过度设计。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">05</div>
+        <div>
+          <h3>原文不由模型复述，由程序回填</h3>
+          <p>小模型会"假装引用"——让它照抄原文，它会把提示词占位文字填回来。
+             改成：模型只输出句子编号（[p3-s2]），程序回填真实原句。</p>
+          <div class="lesson">能把可靠性交给代码的，就不要交给模型。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">06</div>
+        <div>
+          <h3>指标要能证伪：做了 A/B 才敢说"设计有效"</h3>
+          <p>原来所有结论都是自说自话（"换了学术源效果更好"）。补了 10 主题对照实验：
+             B0 直接检索 6%、B1 加检索式 57.5%、B2 硬约束 64.5%、B3 软惩罚 62.0%。
+             也发现了反例——3 个主题上约束反而变差，归因是同义词被硬约束误杀。</p>
+          <div class="lesson">没有 baseline 的优化是自我感动；能解释负面结果，才说明真的在做产品。</div>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="idx">07</div>
+        <div>
+          <h3>指标不能和机制同源（构念效度）</h3>
+          <p>v2 上线后指标测不出它的好处，因为 on-topic 判定和硬约束用的是同一套关键词——
+             被"误杀"的同义表达按定义就算 off-topic，指标根本看不见。这是评测在测自己。</p>
+          <div class="lesson">当指标和设计同源时，要么换标注方式（人工/AI+抽检），要么诚实说"这个指标测不出来"。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <h2>数据：可复现的验证</h2>
+    <p class="sub">qwen2.5:3b，纯 CPU，16GB 内存笔记本；指标由程序自动产出，可逐条核对。</p>
+
+    <h3 style="font-size:16px;margin:0 0 10px">① 检索层 A/B 实验（10 个主题，同一批数据源）</h3>
+    <table>
+      <thead><tr><th>条件</th><th>Precision@10（核心概念 + 领域同时命中）</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>B0 naive</td><td><b>6.0%</b></td><td>直接用中文主题检索，不规划、不约束</td></tr>
+        <tr><td>B1 检索式</td><td><b>57.5%</b></td><td>模型生成英文学术检索式 + 多源检索 + 去重打分</td></tr>
+        <tr><td>B2 hard（v1）</td><td><b>64.5%</b></td><td>B1 + 核心概念/领域硬淘汰</td></tr>
+        <tr><td>B3 soft（v2）</td><td><b>62.0%</b></td><td>B1 + 同义词扩展 + 软惩罚（当前默认）</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px">
+      诚实解读：<b>B0→B1 是稳健的数量级提升</b>；<b>B1→B2→B3 都在噪声里</b>（重复运行波动 ±11~14pp），
+      v2 的 62.0% 并不比 v1 的 64.5% 好。更关键的是——<b>on-topic 判定和硬约束用的是同一套关键词，
+      指标天然偏向硬约束，看不见"同义表达被误杀"</b>（构念效度问题）。
+      所以 v2 上线不是为了"更准"，而是消除结构性风险；它的收益必须靠人工标注 100 篇才能验证。
+      完整分析：<a href="portfolio/demos/eval-检索A-B评测.md">检索 A/B 报告</a> ·
+      <a href="portfolio/demos/eval-v2软惩罚结果.md">v2 结果</a>。
+    </p>
+
+    <h3 style="font-size:16px;margin:24px 0 10px">③ 模型对比：3B vs 7B（同一抽取任务）</h3>
+    <table>
+      <thead><tr><th>模型</th><th>平均耗时/篇</th><th>有效字段率</th><th>结论</th></tr></thead>
+      <tbody>
+        <tr><td>qwen2.5:3b</td><td>12.6s</td><td><b>80%</b></td><td>简单论文够用；ToT 这类只抽出 2/5 字段</td></tr>
+        <tr><td>qwen2.5:7b</td><td>35.7s</td><td><b>100%</b></td><td>难题也能抽全，代价是 2.8× 时间</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:10px">
+      这组数据支撑了"本地/云端一键切换"的设计：默认 3B（快、免费），质量敏感时换 7B 或云端。
+      原始抽取 JSON 附在 <a href="portfolio/demos/eval-模型对比3B-vs-7B.md">模型对比报告</a>，可逐条核对；
+      检索 A/B 的完整分析见 <a href="portfolio/demos/eval-检索A-B评测.md">评测报告</a>。
+    </p>
+
+    <h3 style="font-size:16px;margin:24px 0 10px">④ 效率与结构正确性</h3>
+    <table>
+      <thead><tr><th>指标</th><th>结果</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>一次综述耗时</td><td><b>约 6 分钟</b></td><td>2 轮 × 4 篇，精读 8 篇</td></tr>
+        <tr><td>引用编号有效性</td><td><b>23/23</b></td><td>结构下限（参考文献由程序生成，100% 是应有结果）</td></tr>
+        <tr><td>参考文献完整率</td><td><b>8/8</b></td><td>全部带 DOI 或 arXiv 链接</td></tr>
+        <tr><td>数字可追溯率</td><td><b>100%</b>（仅 2 个数字）</td><td>质量信号，但样本过小，不宣称准确率</td></tr>
+        <tr><td>引用语义支撑率</td><td>33.3% / 27.3%</td><td>同稿两次不一致 → 已降级为可选参考</td></tr>
+        <tr><td>已知 badcase</td><td>74% 被写成 87.8%</td><td>3B 数字幻觉，已写入反幻觉提示词，仍需人工核对</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="demos">
+  <div class="wrap">
+    <h2>样例产出</h2>
+    <p class="sub">都是本地跑的原始结果，可直接点开核对。</p>
+    <div class="demos">
+      <div class="demo">
+        <span class="type">文献综述</span>
+        <h3>大语言模型在金融风控中的应用</h3>
+        <p>8 篇精读、23 处引用全部有效、数字可追溯 100%、8 条带 DOI 参考文献。</p>
+        <p style="margin-top:10px"><a href="portfolio/demos/review-大语言模型在金融风控.md">打开 →</a></p>
+      </div>
+      <div class="demo">
+        <span class="type">单篇精读</span>
+        <h3>Tree of Thoughts（4 万字 arXiv 全文）</h3>
+        <p>2.5 分钟生成结构化中文笔记：问题、方法、数据、结果、局限、启发、推荐指数。</p>
+        <p style="margin-top:10px"><a href="portfolio/demos/reading-Tree-of-Thoughts.md">打开 →</a></p>
+      </div>
+      <div class="demo">
+        <span class="type">论文对话</span>
+        <h3>围绕 Tree of Thoughts 连续追问</h3>
+        <p>3 轮问答都带页码；"提炼可写观点"给出观点 + 英文原句 + 页码 + 怎么用 + 注意。</p>
+        <p style="margin-top:10px"><a href="portfolio/demos/chat-Tree-of-Thoughts.md">打开 →</a></p>
+      </div>
+      <div class="demo">
+        <span class="type">文献库</span>
+        <h3>LLM 推理三篇（ToT / CoT / Self-Consistency）</h3>
+        <p>跨文献问答 + 对比表 + 共同研究空白，一次生成。</p>
+        <p style="margin-top:10px"><a href="portfolio/demos/library-LLM推理三篇.md">打开 →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <h2>我的产品</h2>
+    <p class="sub">两个自研小产品，一个证明"能做深"，一个证明"能做爆"——都可以点开用。</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="k">代表作 1 · 技术深度</div>
+        <h3>📚 Local Literature Agent</h3>
+        <p>就是本页：中文学术文献 Agent，检索 → 精读 → 综述 → 引用核验 → 论文对话，本地模型可跑。</p>
+        <p style="margin-top:10px"><a href="README.md">项目主页 →</a></p>
+      </div>
+      <div class="card">
+        <div class="k">代表作 2 · 产品与增长</div>
+        <h3>🎲 Quiz Factory</h3>
+        <p>一句话生成可分享的人格测试：三段式生成 + 质量门禁 + 结果稀有度，单文件网页即开即玩。</p>
+        <p style="margin-top:10px"><a href="https://Aurorawby.github.io/quiz-factory/" style="color:#d03030;font-weight:600">打开测试合集 →</a></p>
+      </div>
+      <div class="card">
+        <div class="k">怎么讲这两个项目</div>
+        <h3>一套方法论，两种产品</h3>
+        <p>都遵循同一条：结构交给代码、内容交给模型、指标必须可复现、负面结果如实报告。</p>
+        <p style="margin-top:10px"><a href="portfolio/case-study.md">产品案例 →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>技术栈</h2>
+    <p class="sub">刻意保持轻量：本地能跑、依赖少、每个环节可替换。</p>
+    <div class="chips">
+      <span class="chip">Python 3.13</span>
+      <span class="chip">LangGraph</span>
+      <span class="chip">Ollama · qwen2.5</span>
+      <span class="chip">OpenAI 兼容接口</span>
+      <span class="chip">Crossref</span>
+      <span class="chip">DOAJ</span>
+      <span class="chip">arXiv</span>
+      <span class="chip">OpenAlex</span>
+      <span class="chip">PyMuPDF</span>
+      <span class="chip">BM25（纯 Python）</span>
+      <span class="chip">Streamlit</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>路线图</h2>
+    <p class="sub">已完成 8 项，下一步优先做评测集。</p>
+    <div class="grid3">
+      <div class="card"><h3>✅ 已完成</h3><p>多源检索 · 相关性约束（v1 硬淘汰 → v2 软惩罚）· 结构化精读 · 中文综述 · 确定性引用核验 · 网页界面 + 云端切换 · 论文对话 · 文献库对话 · 10 主题 A/B 评测 · 3B vs 7B 模型对比 · 用户测试套件</p></div>
+      <div class="card"><h3>🔜 下一步</h3><p>人工标注 100 篇（验证 v2 召回收益）· 5 人可用性测试（套件已就绪）· 引文滚雪球</p></div>
+      <div class="card"><h3>🎯 产品边界</h3><p>定位是「综述初稿 + 线索发现」，不是替写论文；中文库走本地 PDF 的合规路径，不做爬虫。</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <b>Local Literature Agent</b> · 作者：<b>Aurorawby</b><br>
+      LangGraph + Ollama · MIT License · 基于 langchain-ai/local-deep-researcher 改造
+    </div>
+    <div>
+      文档：<a href="README.md">README</a> · <a href="portfolio/case-study.md">产品案例</a><br>
+      联系：<a href="https://github.com/Aurorawby">github.com/Aurorawby</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1005 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-10-28",
+    "purpose": "检索层 A/B 评测：验证'换学术源 + 检索式规划 + 相关性硬约束'是否真的提升相关论文命中率",
+    "labeling": "人工定义 core_terms（核心概念）与 domain_terms（应用领域）。一篇论文算 on-topic 当且仅当标题或摘要同时命中至少一个 core_term 和至少一个 domain_term（英文小写子串匹配）。",
+    "caveat": "这是关键词代理指标，不是人工逐篇标注；结论用于同条件间对比，不宣称绝对准确率。"
+  },
+  "config": {
+    "per_query": 10,
+    "top_k": 10
+  },
+  "summary": {
+    "topics": 10,
+    "repeats": 2,
+    "conditions": {
+      "b0": {
+        "precision@10": 6.0,
+        "precision@10_mean_range": 0.0,
+        "core@10": 15.0,
+        "domain@10": 15.0
+      },
+      "b1": {
+        "precision@10": 57.5,
+        "precision@10_mean_range": 11.0,
+        "core@10": 69.0,
+        "domain@10": 77.0
+      },
+      "b2": {
+        "precision@10": 64.5,
+        "precision@10_mean_range": 11.0,
+        "core@10": 73.0,
+        "domain@10": 86.0
+      },
+      "b3": {
+        "precision@10": 62.0,
+        "precision@10_mean_range": 14.0,
+        "core@10": 73.0,
+        "domain@10": 83.5
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "llm_finance",
+      "topic": "大语言模型在金融风控中的应用",
+      "queries": [
+        "large language model finance risk",
+        "gpt credit scoring",
+        "large language model transformer fraud detection"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 71
+      },
+      "elapsed_s": 57.4,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 20.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 50.0,
+        "precision@10_values": [
+          60.0,
+          40.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 80.0,
+        "domain@10": 55.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 100.0,
+        "precision@10_values": [
+          100.0,
+          100.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 100.0,
+        "domain@10": 100.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 90.0,
+        "precision@10_values": [
+          80.0,
+          100.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 100.0,
+        "domain@10": 90.0
+      },
+      "b3_titles": [
+        "Supply Chain Finance Credit Risk Assessment Based on LLM Enhanced Graph Structure",
+        "Credit risk prediction and heterogeneity analysis for SMEs based on large language models ",
+        "Robustness of Big Language Modeling in Finance",
+        "Assessing Consistency and Reproducibility in the Outputs of Large Language Models: Evidenc",
+        "Standard Benchmarks Fail -- Auditing LLM Agents in Finance Must Prioritize Risk",
+        "Credit Risk Meets Large Language Models: Building a Risk Indicator from Loan Descriptions ",
+        "AgentLeak: A Benchmark for Internal-Channel Privacy Leakage in Multi-Agent LLM Systems",
+        "Contamination Percolation in Multi-Agent LLM Systems: A Measurement Framework and Benchmar",
+        "Uni-FinLLM: A Unified Multimodal Large Language Model with Modular Task Heads for Micro-Le",
+        "Constructing a Portfolio Optimization Benchmark Framework for Evaluating Large Language Mo"
+      ],
+      "b2_titles": [
+        "Supply Chain Finance Credit Risk Assessment Based on LLM Enhanced Graph Structure",
+        "Credit risk prediction and heterogeneity analysis for SMEs based on large language models ",
+        "Assessing Consistency and Reproducibility in the Outputs of Large Language Models: Evidenc",
+        "Standard Benchmarks Fail -- Auditing LLM Agents in Finance Must Prioritize Risk",
+        "Credit Risk Meets Large Language Models: Building a Risk Indicator from Loan Descriptions ",
+        "AgentLeak: A Benchmark for Internal-Channel Privacy Leakage in Multi-Agent LLM Systems",
+        "Contamination Percolation in Multi-Agent LLM Systems: A Measurement Framework and Benchmar",
+        "Uni-FinLLM: A Unified Multimodal Large Language Model with Modular Task Heads for Micro-Le",
+        "Constructing a Portfolio Optimization Benchmark Framework for Evaluating Large Language Mo",
+        "Performance Evaluation and Application Potential of Small Large Language Models in Complex"
+      ],
+      "b1_titles": [
+        "Improving Financial Statement Fraud Detection: A Large Language Model Processing Approach",
+        "Enhancing Card Fraud Detection Using Large Language Model (LLM)",
+        "Validating Large Language Model Annotations",
+        "Quantifying Deregulation and its Economic Effects: A Large Language Model Approach",
+        "From Credit History to Credit Potential: Alternative Data, Algorithmic Credit Scoring, and",
+        "Analysis of the effectiveness of using neural network methods in credit scoring systems",
+        "Large Language Model-Enhanced Mutual Node-Edge Reinforcement for Inductive Fraud Detection",
+        "Advanced Caching Strategies for High-Throughput Large Language Model Serving",
+        "Artificial Intelligence-Based Web Attack Detection: A Survey of Machine Learning, Deep Lea",
+        "Transformer-Based Anomaly Detection for First-Party Fraud Patterns Across Transaction Grap"
+      ]
+    },
+    {
+      "id": "esg",
+      "topic": "ESG 投资与企业绩效",
+      "queries": [
+        "ESG investment performance",
+        "ESG enterprise performance",
+        "ESG impact assessment"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 82
+      },
+      "elapsed_s": 51.3,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 20.0,
+        "precision@10_values": [
+          20.0,
+          20.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 50.0,
+        "domain@10": 20.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 70.0,
+        "precision@10_values": [
+          80.0,
+          60.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 100.0,
+        "domain@10": 70.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 80.0,
+        "precision@10_values": [
+          90.0,
+          70.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 100.0,
+        "domain@10": 80.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 70.0,
+        "precision@10_values": [
+          80.0,
+          60.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 100.0,
+        "domain@10": 70.0
+      },
+      "b3_titles": [
+        "Digital transformation, ESG performance and enterprise innovation",
+        "Enterprise ESG Performance, Digital Transformation, and Firm Performance: Evidence from Ch",
+        "Strategic Management and ESG Impact Assessment in Sustainable Agribusiness Development Mod",
+        "Demystifying the relationship between ESG and SDG performance: Study of emerging economies",
+        "ESG ratings and stock performance in the internet industry",
+        "ESG practices disclosure and initial performance of Malaysian IPOS",
+        "Does ESG Performance Affect Enterprise Innovation Performance? A Study on Governance and R",
+        "Commercial System Reform, Enterprise Green Innovation and Enterprise ESG Performance",
+        "ESG performance and corporate financial performance in China: Moderating effects of analys",
+        "Comparative Analysis of ESG-Focused DeFi Protocols and Traditional ESG Funds: Financial Pe"
+      ],
+      "b2_titles": [
+        "Strategic Management and ESG Impact Assessment in Sustainable Agribusiness Development Mod",
+        "Measuring Sustainability Intention of ESG Fund Disclosure using Few-Shot Learning",
+        "Does Green Finance Policy Contribute to ESG Disclosure of Listed Companies? A Quasi-Natura",
+        "Comparative Analysis of ESG-Focused DeFi Protocols and Traditional ESG Funds: Financial Pe",
+        "The Impact of Green Investment, ESG Disclosure, and Financial Performance on the Value of ",
+        "Sustainability Performance and Reporting – A Strategic Issue for Electric Car Automakers",
+        "The Moderating Role of Environmental Performance in the Relationship between Green Banking",
+        "THE NORDIC MODEL OF SUSTAINABLE VALUE CREATION: ESG, PUBLIC-PRIVATE COLLABORATION, AND MAR",
+        "ESG-Kor: A Korean Dataset for ESG-related Information Extraction and Practical Use Cases",
+        "Work-related stress as a material ESG issue: a single-company case study on psychosocial r"
+      ],
+      "b1_titles": [
+        "Digital transformation, ESG performance and enterprise innovation",
+        "Enterprise ESG Performance, Digital Transformation, and Firm Performance: Evidence from Ch",
+        "Strategic Management and ESG Impact Assessment in Sustainable Agribusiness Development Mod",
+        "Demystifying the relationship between ESG and SDG performance: Study of emerging economies",
+        "ESG ratings and stock performance in the internet industry",
+        "ESG practices disclosure and initial performance of Malaysian IPOS",
+        "Does ESG Performance Affect Enterprise Innovation Performance? A Study on Governance and R",
+        "Commercial System Reform, Enterprise Green Innovation and Enterprise ESG Performance",
+        "ESG performance and corporate financial performance in China: Moderating effects of analys",
+        "Comparative Analysis of ESG-Focused DeFi Protocols and Traditional ESG Funds: Financial Pe"
+      ]
+    },
+    {
+      "id": "intl_finance",
+      "topic": "国际金融风险传导",
+      "queries": [
+        "international financial risk transmission",
+        "financial contagion impact",
+        "financial contagion global financial risk spread"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 75
+      },
+      "elapsed_s": 62.1,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 0.0,
+        "domain@10": 10.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 30.0,
+        "precision@10_values": [
+          30.0,
+          30.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 35.0,
+        "domain@10": 80.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 40.0,
+        "precision@10_values": [
+          50.0,
+          30.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 40.0,
+        "domain@10": 100.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 35.0,
+        "precision@10_values": [
+          30.0,
+          40.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 35.0,
+        "domain@10": 100.0
+      },
+      "b3_titles": [
+        "Financial sector resilience under political and institutional stress : Macro-financial con",
+        "COVID-19 Pandemic and Financial Contagion",
+        "Financial contagion in the US, European and Chinese stock markets during global shocks",
+        "Financial contagion: The impact of the volatility of global stock exchanges on the Lima-Pe",
+        "Contagion in the LAC Financial Markets: The Impact of Stock Crises of 2008 and 2010",
+        "The Persistent Effects of US-China Tension on Stock Market Dynamics",
+        "Community-level Contagion among Diverse Financial Assets",
+        "Quantifying Impact, Uncovering Trends: A Comprehensive Bibliometric Analysis of Shadow Ban",
+        "The Bayesian approach to measuring financial contagion",
+        "Contagion and spillover effects of global financial markets on the Indonesian Sharia Stock"
+      ],
+      "b2_titles": [
+        "Financial sector resilience under political and institutional stress : Macro-financial con",
+        "COVID-19 Pandemic and Financial Contagion",
+        "Financial contagion in the US, European and Chinese stock markets during global shocks",
+        "Financial contagion: The impact of the volatility of global stock exchanges on the Lima-Pe",
+        "Contagion in the LAC Financial Markets: The Impact of Stock Crises of 2008 and 2010",
+        "The Persistent Effects of US-China Tension on Stock Market Dynamics",
+        "Community-level Contagion among Diverse Financial Assets",
+        "Quantifying Impact, Uncovering Trends: A Comprehensive Bibliometric Analysis of Shadow Ban",
+        "The Bayesian approach to measuring financial contagion",
+        "Impact of credit default swaps on financial contagion"
+      ],
+      "b1_titles": [
+        "Estimating the impact of supply chain network contagion on financial stability",
+        "Quantifying Impact, Uncovering Trends: A Comprehensive Bibliometric Analysis of Shadow Ban",
+        "Contagion and spillover effects of global financial markets on the Indonesian Sharia Stock",
+        "The Transmission of Climate Shocks to Financial Risk in Morocco: A Macro-Financial Perspec",
+        "How Does Climate Risk Affect the Cost of Debt in Chinese A-Share Listed Firms? Evidence fr",
+        "The Bayesian approach to measuring financial contagion",
+        "Financial sector resilience under political and institutional stress : Macro-financial con",
+        "COVID-19 Pandemic and Financial Contagion",
+        "Toward a Public-Sector Resilience Reporting Standard for Low-Probability, High-Impact Syst",
+        "Evaluating the spillover effects of FTSE4Good USA index: a sectoral analysis of United Sta"
+      ]
+    },
+    {
+      "id": "supply_chain",
+      "topic": "供应链韧性",
+      "queries": [
+        "supply chain resilience",
+        "resilient supply chain logistics",
+        "logistics resilience supply chain"
+      ],
+      "candidates": {
+        "b0": 16,
+        "pipeline": 80
+      },
+      "elapsed_s": 54.9,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 30.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 80.0,
+        "precision@10_values": [
+          80.0,
+          80.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 90.0,
+        "domain@10": 90.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 80.0,
+        "precision@10_values": [
+          80.0,
+          80.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 100.0,
+        "domain@10": 80.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 80.0,
+        "precision@10_values": [
+          80.0,
+          80.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 100.0,
+        "domain@10": 80.0
+      },
+      "b3_titles": [
+        "The impact of supply chain transparency and supply chain resilience on supply chain risk m",
+        "Weathering the Storm: Dynamic Capabilities and Supply Chain Agility in Supply Chain Resili",
+        "Optimizing Resilient Sustainable Citrus Supply Chain Design",
+        "From Green Supply Chain Management to Supply Chain Viability: The Mediating Role of Supply",
+        "The Strait of Hormuz as a supply chain resilience stress test: maritime chokepoints, energ",
+        "Impact of capacity volatility and input substitutability on supply chain resilience",
+        "An Optimization-Based Expert System for Resilient Emergency Blood Supply Chains: A Multi-O",
+        "Prioritizing Food Quality Criteria for Risk Management in Digital Twin Supply Chains under",
+        "Identifying critical management activities for off-site construction supply chain coordina",
+        "Real-Time Climate Risk Assessment for Supply Chain Resilience: A Data-Driven Nowcasting Fr"
+      ],
+      "b2_titles": [
+        "The impact of supply chain transparency and supply chain resilience on supply chain risk m",
+        "Weathering the Storm: Dynamic Capabilities and Supply Chain Agility in Supply Chain Resili",
+        "Optimizing Resilient Sustainable Citrus Supply Chain Design",
+        "From Green Supply Chain Management to Supply Chain Viability: The Mediating Role of Supply",
+        "The Strait of Hormuz as a supply chain resilience stress test: maritime chokepoints, energ",
+        "Impact of capacity volatility and input substitutability on supply chain resilience",
+        "An Optimization-Based Expert System for Resilient Emergency Blood Supply Chains: A Multi-O",
+        "Prioritizing Food Quality Criteria for Risk Management in Digital Twin Supply Chains under",
+        "Identifying critical management activities for off-site construction supply chain coordina",
+        "Real-Time Climate Risk Assessment for Supply Chain Resilience: A Data-Driven Nowcasting Fr"
+      ],
+      "b1_titles": [
+        "The impact of supply chain transparency and supply chain resilience on supply chain risk m",
+        "Weathering the Storm: Dynamic Capabilities and Supply Chain Agility in Supply Chain Resili",
+        "Optimizing Resilient Sustainable Citrus Supply Chain Design",
+        "From Green Supply Chain Management to Supply Chain Viability: The Mediating Role of Supply",
+        "The Strait of Hormuz as a supply chain resilience stress test: maritime chokepoints, energ",
+        "Calibrated Machine Learning with Temporal Leakage Controls for Rare-Event Forecasting of P",
+        "Impact of Load Shedding on Fresh Fish Suppliers and Consumers in Chinsali District, Zambia",
+        "Impact of capacity volatility and input substitutability on supply chain resilience",
+        "An Optimization-Based Expert System for Resilient Emergency Blood Supply Chains: A Multi-O",
+        "Prioritizing Food Quality Criteria for Risk Management in Digital Twin Supply Chains under"
+      ]
+    },
+    {
+      "id": "solid_battery",
+      "topic": "固态电池界面稳定性",
+      "queries": [
+        "solid state battery interface stability",
+        "interface stability solid state battery",
+        "battery interface stability solid state"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 30
+      },
+      "elapsed_s": 66.3,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 10.0,
+        "precision@10_values": [
+          10.0,
+          10.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 10.0,
+        "domain@10": 60.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 65.0,
+        "precision@10_values": [
+          60.0,
+          70.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 65.0,
+        "domain@10": 100.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 55.0,
+        "precision@10_values": [
+          50.0,
+          60.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 55.0,
+        "domain@10": 100.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 55.0,
+        "precision@10_values": [
+          50.0,
+          60.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 55.0,
+        "domain@10": 100.0
+      },
+      "b3_titles": [
+        "Controlling moving interfaces in solid state batteries",
+        "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte and Sodium Metal Anode for Qua",
+        "Synergistic Interface Stability and High Room-Temperature Ionic Conductivity for Wide-Temp",
+        "Application of Solid Polymer Electrolytes for Solid-State Sodium Batteries",
+        "Synthesis and Modification of Tetrahedron Li10.35Si1.35P1.65S12via Elemental Doping for Al",
+        "DFT Modelling of Explicit Solid-Solid Interfaces in Batteries: Methods and Challenges",
+        "AES lithium chemical mapping in buried interface of all‐solid‐state battery materials",
+        "Autonomous disulfide-crosslinked PEGDA solid polymer electrolyte for self-healing lithium-",
+        "Electrochemical stability and lithium insertion at the Li|Li3OCl solid electrolyte interfa",
+        "Robust All-Solid-State Batteries with Sodium Ion Electrolyte, Aluminum and Additive Manufa"
+      ],
+      "b2_titles": [
+        "Controlling moving interfaces in solid state batteries",
+        "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte and Sodium Metal Anode for Qua",
+        "Synergistic Interface Stability and High Room-Temperature Ionic Conductivity for Wide-Temp",
+        "Application of Solid Polymer Electrolytes for Solid-State Sodium Batteries",
+        "Synthesis and Modification of Tetrahedron Li10.35Si1.35P1.65S12via Elemental Doping for Al",
+        "DFT Modelling of Explicit Solid-Solid Interfaces in Batteries: Methods and Challenges",
+        "AES lithium chemical mapping in buried interface of all‐solid‐state battery materials",
+        "Autonomous disulfide-crosslinked PEGDA solid polymer electrolyte for self-healing lithium-",
+        "Electrochemical stability and lithium insertion at the Li|Li3OCl solid electrolyte interfa",
+        "Robust All-Solid-State Batteries with Sodium Ion Electrolyte, Aluminum and Additive Manufa"
+      ],
+      "b1_titles": [
+        "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte and Sodium Metal Anode for Qua",
+        "AES lithium chemical mapping in buried interface of all‐solid‐state battery materials",
+        "Autonomous disulfide-crosslinked PEGDA solid polymer electrolyte for self-healing lithium-",
+        "Electrochemical stability and lithium insertion at the Li|Li3OCl solid electrolyte interfa",
+        "Synergistic Interface Stability and High Room-Temperature Ionic Conductivity for Wide-Temp",
+        "Robust All-Solid-State Batteries with Sodium Ion Electrolyte, Aluminum and Additive Manufa",
+        "Induction Effect of Fluorine-Grafted Polymer-Based Electrolytes for High-Performance Lithi",
+        "MXene-nanoflower composites as high-performance electrode materials toward solid-state lit",
+        "Advancements in Solid-State Sodium-Based Batteries: A Comprehensive Review",
+        "Controlling moving interfaces in solid state batteries"
+      ]
+    },
+    {
+      "id": "medical_seg",
+      "topic": "医学影像分割的深度学习方法",
+      "queries": [
+        "deep learning medical imaging segmentation",
+        "medical image segmentation dl",
+        "dl medical image segmentation"
+      ],
+      "candidates": {
+        "b0": 12,
+        "pipeline": 57
+      },
+      "elapsed_s": 62.8,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 20.0,
+        "precision@10_values": [
+          20.0,
+          20.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 20.0,
+        "domain@10": 50.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 95.0,
+        "precision@10_values": [
+          100.0,
+          90.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 95.0,
+        "domain@10": 100.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 100.0,
+        "precision@10_values": [
+          100.0,
+          100.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 100.0,
+        "domain@10": 100.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 95.0,
+        "precision@10_values": [
+          100.0,
+          90.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 95.0,
+        "domain@10": 100.0
+      },
+      "b3_titles": [
+        "Semi-Supervised Medical Image Segmentation Based on Deep Consistent Collaborative Learning",
+        "MIScnn: a framework for medical image segmentation with convolutional neural networks and ",
+        "Application of deep learning in medical imaging segmentation",
+        "DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven D",
+        "Deep structured learning with vision intelligence for oral carcinoma lesion segmentation a",
+        "MedSegNet10: A Publicly Accessible Network Repository for Split Federated Medical Image Se",
+        "HiDiff: Hybrid Diffusion Framework for Medical Image Segmentation",
+        "U-Net in Medical Image Segmentation: A Review of Its Applications Across Modalities",
+        "Exploring Transfer Learning in Medical Image Segmentation using Vision-Language Models",
+        "Medical Image Segmentation with Domain Adaptation: A Survey"
+      ],
+      "b2_titles": [
+        "Semi-Supervised Medical Image Segmentation Based on Deep Consistent Collaborative Learning",
+        "MIScnn: a framework for medical image segmentation with convolutional neural networks and ",
+        "Application of deep learning in medical imaging segmentation",
+        "DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven D",
+        "MedSegNet10: A Publicly Accessible Network Repository for Split Federated Medical Image Se",
+        "HiDiff: Hybrid Diffusion Framework for Medical Image Segmentation",
+        "U-Net in Medical Image Segmentation: A Review of Its Applications Across Modalities",
+        "Exploring Transfer Learning in Medical Image Segmentation using Vision-Language Models",
+        "Medical Image Segmentation with Domain Adaptation: A Survey",
+        "Diminishing Uncertainty within the Training Pool: Active Learning for Medical Image Segmen"
+      ],
+      "b1_titles": [
+        "Semi-Supervised Medical Image Segmentation Based on Deep Consistent Collaborative Learning",
+        "MIScnn: a framework for medical image segmentation with convolutional neural networks and ",
+        "A Review on Deep Learning Architecture and Methods for MRI Brain Tumour Segmentation",
+        "Application of deep learning in medical imaging segmentation",
+        "Demystifying Artificial Intelligence: A Systematic Review of Explainable Artificial Intell",
+        "Deep learning for cardiac CT segmentation for congenital heart disease: A systematic revie",
+        "Explainable deep learning-based lung cancer diagnosis using clinically-guided local interp",
+        "A knowledge distillation framework integrating Grad-CAM in ResNet for imbalanced gastroint",
+        "Dual-Stream Contrastive Learning for Medical Visual Representations Using Synthetic Images",
+        "Comparative Analysis of Hybrid Attention and Progressive Layering Through a Comprehensive "
+      ]
+    },
+    {
+      "id": "edu_llm",
+      "topic": "大语言模型在教育中的应用",
+      "queries": [
+        "language model education",
+        "llm education application",
+        "transformer education"
+      ],
+      "candidates": {
+        "b0": 11,
+        "pipeline": 84
+      },
+      "elapsed_s": 68.8,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 10.0,
+        "precision@10_values": [
+          10.0,
+          10.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 20.0,
+        "domain@10": 10.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 60.0,
+        "precision@10_values": [
+          60.0,
+          60.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 70.0,
+        "domain@10": 70.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 90.0,
+        "precision@10_values": [
+          90.0,
+          90.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 90.0,
+        "domain@10": 100.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 90.0,
+        "precision@10_values": [
+          90.0,
+          90.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 90.0,
+        "domain@10": 100.0
+      },
+      "b3_titles": [
+        "Integrating AI Literacy in Chemistry Graduate Education: Harnessing the Power of Transform",
+        "An Explainable Large Language Model Framework for Personalized Inclusive Education Interve",
+        "The Application of a Large Language Model (LLM) in Education Reform and Innovation: Theory",
+        "Development of an Conversational LLM-Based Conversational AI Agent to Promote Creative Met",
+        "A Systematical Study of LLM-based Application on Education",
+        "Education for Sustainable Development: A Social Transformer for meeting Sustainability Nee",
+        "Large Language Model–Assisted Thematic Coding in Medical Education Research: Comparative M",
+        "LLM Prompt Evaluation for Educational Applications",
+        "Small Language Models Reshape Higher Education: Courses, Textbooks, and Teaching",
+        "The role of large language models in personalized learning: a systematic review of educati"
+      ],
+      "b2_titles": [
+        "Integrating AI Literacy in Chemistry Graduate Education: Harnessing the Power of Transform",
+        "An Explainable Large Language Model Framework for Personalized Inclusive Education Interve",
+        "The Application of a Large Language Model (LLM) in Education Reform and Innovation: Theory",
+        "Development of an Conversational LLM-Based Conversational AI Agent to Promote Creative Met",
+        "A Systematical Study of LLM-based Application on Education",
+        "Education for Sustainable Development: A Social Transformer for meeting Sustainability Nee",
+        "Large Language Model–Assisted Thematic Coding in Medical Education Research: Comparative M",
+        "LLM Prompt Evaluation for Educational Applications",
+        "Small Language Models Reshape Higher Education: Courses, Textbooks, and Teaching",
+        "The role of large language models in personalized learning: a systematic review of educati"
+      ],
+      "b1_titles": [
+        "Integrating AI Literacy in Chemistry Graduate Education: Harnessing the Power of Transform",
+        "APPLICATION OF LLM IN UAV ROUTE PLANNING TASKS TO PREVENT DATA EXCHANGE AVAILABILITY VIOLA",
+        "An Explainable Large Language Model Framework for Personalized Inclusive Education Interve",
+        "The Application of a Large Language Model (LLM) in Education Reform and Innovation: Theory",
+        "Development of an Conversational LLM-Based Conversational AI Agent to Promote Creative Met",
+        "Analysis of Inserted Transformer Installation to Reduce Distribution Transformer Overload ",
+        "Unexplained distribution transformer failures: Revealing the underlying mechanisms",
+        "Exploring the potential of LLM-based customized test item generators: Focusing on Poe AI a",
+        "Model of Immersive Learning in Language Education (MILLE)",
+        "A Systematical Study of LLM-based Application on Education"
+      ]
+    },
+    {
+      "id": "data_market",
+      "topic": "数据要素市场化",
+      "queries": [
+        "data market data element marketization",
+        "data marketization finance",
+        "data marketization regulation"
+      ],
+      "candidates": {
+        "b0": 19,
+        "pipeline": 82
+      },
+      "elapsed_s": 66.8,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 0.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 80.0,
+        "precision@10_values": [
+          70.0,
+          90.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 80.0,
+        "domain@10": 85.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 55.0,
+        "precision@10_values": [
+          60.0,
+          50.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 75.0,
+        "domain@10": 80.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 55.0,
+        "precision@10_values": [
+          60.0,
+          50.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 75.0,
+        "domain@10": 80.0
+      },
+      "b3_titles": [
+        "Marketization of Data Elements and Corporate Green Innovation: Evidence from the Establish",
+        "Data Factor Marketization, Urban Economic Growth, and Spatial Spillovers: Evidence from Na",
+        "A vision for global privacy bridges: Technical and legal measures for international data m",
+        "Exploration of pathway of municipal data element market construction: experience and insig",
+        "Unleashing the power of data element markets: Driving urban green growth through marketiza",
+        "Unpaid labour in online freelancing platforms: between marketization strategies and self-e",
+        "Research on the Protection of machine-generated data under the background of data element ",
+        "The impact of green finance development on agricultural ecological efficiency and spatial ",
+        "Sci-Tech finance efficiency promotes the construction of a modernized industrial system ev",
+        "Inclusive finance development and intergenerational income mobility: evidence from China"
+      ],
+      "b2_titles": [
+        "Marketization of Data Elements and Corporate Green Innovation: Evidence from the Establish",
+        "Data Factor Marketization, Urban Economic Growth, and Spatial Spillovers: Evidence from Na",
+        "A vision for global privacy bridges: Technical and legal measures for international data m",
+        "Exploration of pathway of municipal data element market construction: experience and insig",
+        "Research on the Protection of machine-generated data under the background of data element ",
+        "Unleashing the power of data element markets: Driving urban green growth through marketiza",
+        "Unpaid labour in online freelancing platforms: between marketization strategies and self-e",
+        "The impact of green finance development on agricultural ecological efficiency and spatial ",
+        "Sci-Tech finance efficiency promotes the construction of a modernized industrial system ev",
+        "Inclusive finance development and intergenerational income mobility: evidence from China"
+      ],
+      "b1_titles": [
+        "Unleashing the power of data element markets: Driving urban green growth through marketiza",
+        "Data Factor Marketization and Urban Industrial Land Use Efficiency: Evidence from the Esta",
+        "Marketization of Data Elements and Corporate Green Innovation: Evidence from the Establish",
+        "Mechanism and Spatial Spillover Effect of Data Element Marketization on Industrial Chain R",
+        "Protection Paths of Data Intellectual Property in the Context of Data Element Marketizatio",
+        "Data Factor Marketization, Urban Economic Growth, and Spatial Spillovers: Evidence from Na",
+        "Unpaid labour in online freelancing platforms: between marketization strategies and self-e",
+        "Research on the Protection of machine-generated data under the background of data element ",
+        "Govern digitalization with digitalization: government digital governance and corporate fal",
+        "Connotations and Innovative Path of Data Element Discipline Construction under the Backgro"
+      ]
+    },
+    {
+      "id": "carbon",
+      "topic": "碳中和政策对企业的影响",
+      "queries": [
+        "carbon neutrality policy impact enterprise",
+        "green policy firm effect",
+        "renewable energy policy firm impact"
+      ],
+      "candidates": {
+        "b0": 12,
+        "pipeline": 67
+      },
+      "elapsed_s": 73.1,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 0.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 25.0,
+        "precision@10_values": [
+          30.0,
+          20.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 35.0,
+        "domain@10": 70.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 30.0,
+        "precision@10_values": [
+          10.0,
+          50.0
+        ],
+        "precision@10_range": 40.0,
+        "core@10": 35.0,
+        "domain@10": 70.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 35.0,
+        "precision@10_values": [
+          10.0,
+          60.0
+        ],
+        "precision@10_range": 50.0,
+        "core@10": 45.0,
+        "domain@10": 65.0
+      },
+      "b3_titles": [
+        "Research on the Impact of Financing Constraints on Environmental Investment under Carbon P",
+        "Assessment of Policy Benefit Configurations of Net-Zero Emissions: The Impact of Carbon Tr",
+        "Carbon neutrality policies and green brand performance in China's agricultural sector: the",
+        "Analyzing the impact of synergistic environmental regulations and local government competi",
+        "IMPACT OF RENEWABLE ENERGY INVESTMENT ON STOCK MARKET PERFORMANCE: EVIDENCE FROM SOUTH AFR",
+        "FINTECH PENETRATION AND CLIMATE-SMART INFRASTRUCTURE: EVIDENCE FROM RENEWABLE ENERGY FINAN",
+        "Impact of carbon price on Indonesia’s power sector up to 2050",
+        "The impact of peer effect of industrial robot application on enterprise carbon emission re",
+        "Decarbonization of financial markets: a mean-field game approach",
+        "Green Financing Efficiency and Influencing Factors of Chinese Listed Construction Companie"
+      ],
+      "b2_titles": [
+        "Research on the Impact of Financing Constraints on Environmental Investment under Carbon P",
+        "Assessment of Policy Benefit Configurations of Net-Zero Emissions: The Impact of Carbon Tr",
+        "Carbon neutrality policies and green brand performance in China's agricultural sector: the",
+        "Analyzing the impact of synergistic environmental regulations and local government competi",
+        "IMPACT OF RENEWABLE ENERGY INVESTMENT ON STOCK MARKET PERFORMANCE: EVIDENCE FROM SOUTH AFR",
+        "FINTECH PENETRATION AND CLIMATE-SMART INFRASTRUCTURE: EVIDENCE FROM RENEWABLE ENERGY FINAN",
+        "The Interaction Between Renewable Energy Consumption and the Institutional Framework from ",
+        "The Impact of VAT Preferential Policies on the Profitability of China’s New Energy Power G",
+        "Impact of Marketing Activities on the Image of an Energy Company: A Case Study of Electric",
+        "Decomposition of air pollution in Indonesia"
+      ],
+      "b1_titles": [
+        "Assessment of Policy Benefit Configurations of Net-Zero Emissions: The Impact of Carbon Tr",
+        "Impact of carbon price on Indonesia’s power sector up to 2050",
+        "The policy effect of green finance reform and innovations: Empirical evidence at the firm ",
+        "PUBLIC POLICY FRAMEWORKS FOR PROMOTING GREEN INNOVATION: IMPLICATIONS FOR THE PERFORMANCE ",
+        "Research on the Impact of Financing Constraints on Environmental Investment under Carbon P",
+        "Managing the Effect of Green Fiscal Policy on Firm Energy Performance",
+        "Carbon neutrality policies and green brand performance in China's agricultural sector: the",
+        "Going green or green-washing: The impact of CBAM on Chinese firms’ strategic environmental",
+        "The impact of carbon risk on corporate market value: evidence from China",
+        "Board Governance and SDG Disclosure: Evidence from Regional Climate Initiatives in Emergin"
+      ]
+    },
+    {
+      "id": "chip",
+      "topic": "先进制程芯片制造与出口管制",
+      "queries": [
+        "advanced manufacturing chips export control",
+        "advanced chip manufacturing export control",
+        "chip manufacturing export restrictions"
+      ],
+      "candidates": {
+        "b0": 10,
+        "pipeline": 28
+      },
+      "elapsed_s": 58.9,
+      "repeats": 2,
+      "notes": [],
+      "b0": {
+        "n": 10,
+        "precision@10": 0.0,
+        "precision@10_values": [
+          0.0,
+          0.0
+        ],
+        "precision@10_range": 0.0,
+        "core@10": 0.0,
+        "domain@10": 0.0
+      },
+      "b1": {
+        "n": 10,
+        "precision@10": 20.0,
+        "precision@10_values": [
+          10.0,
+          30.0
+        ],
+        "precision@10_range": 20.0,
+        "core@10": 40.0,
+        "domain@10": 50.0
+      },
+      "b2": {
+        "n": 10,
+        "precision@10": 15.0,
+        "precision@10_values": [
+          10.0,
+          20.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 35.0,
+        "domain@10": 50.0
+      },
+      "b3": {
+        "n": 10,
+        "precision@10": 15.0,
+        "precision@10_values": [
+          10.0,
+          20.0
+        ],
+        "precision@10_range": 10.0,
+        "core@10": 35.0,
+        "domain@10": 50.0
+      },
+      "b3_titles": [
+        "Trading Quality for Quantity? Export Control and Innovation Dilemma: Evidence from Chinese",
+        "Reliability Analysis of Semiconductor Material Processing for Advanced Integrated Circuit ",
+        "Near-Term Enforcement of AI Chip Export Controls Using A Firmware-Based Design for Offline",
+        "Export restrictions and the rise of basic research: how chip controls influence Chinese fi",
+        "Impact of Raw Material Export Restrictions on Employment: Evidence from Panel Data",
+        "Current Status and Manufacturing Potential of Semiconductor Chips Across Countries Worldwi",
+        "A feasibility study on the circular manufacturing of sustainable metal additive manufactur",
+        "Silicon Carbide: Physics, Manufacturing, and Its Role in Large-Scale Vehicle Electrificati",
+        "How Export Restrictions Threaten Economic Security",
+        "Joint Development of Operational Control and Learning Is Associated with Competitive Advan"
+      ],
+      "b2_titles": [
+        "Trading Quality for Quantity? Export Control and Innovation Dilemma: Evidence from Chinese",
+        "Reliability Analysis of Semiconductor Material Processing for Advanced Integrated Circuit ",
+        "Near-Term Enforcement of AI Chip Export Controls Using A Firmware-Based Design for Offline",
+        "Export restrictions and the rise of basic research: how chip controls influence Chinese fi",
+        "Impact of Raw Material Export Restrictions on Employment: Evidence from Panel Data",
+        "Current Status and Manufacturing Potential of Semiconductor Chips Across Countries Worldwi",
+        "A feasibility study on the circular manufacturing of sustainable metal additive manufactur",
+        "Silicon Carbide: Physics, Manufacturing, and Its Role in Large-Scale Vehicle Electrificati",
+        "How Export Restrictions Threaten Economic Security",
+        "Joint Development of Operational Control and Learning Is Associated with Competitive Advan"
+      ],
+      "b1_titles": [
+        "A feasibility study on the circular manufacturing of sustainable metal additive manufactur",
+        "Silicon Carbide: Physics, Manufacturing, and Its Role in Large-Scale Vehicle Electrificati",
+        "Export restrictions and the rise of basic research: how chip controls influence Chinese fi",
+        "How Export Restrictions Threaten Economic Security",
+        "Trading Quality for Quantity? Export Control and Innovation Dilemma: Evidence from Chinese",
+        "Current Status and Manufacturing Potential of Semiconductor Chips Across Countries Worldwi",
+        "Joint Development of Operational Control and Learning Is Associated with Competitive Advan",
+        "Probe Card Technologies in Advanced Semiconductor Testing for Wide Band Gap Devices",
+        "Reliability Analysis of Semiconductor Material Processing for Advanced Integrated Circuit ",
+        "Impact of Raw Material Export Restrictions on Employment: Evidence from Panel Data"
+      ]
+    }
+  ]
+}

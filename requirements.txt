@@ -1,0 +1,12 @@
+# 运行时依赖（Windows / macOS / Linux 通用）
+# 安装：pip install -r requirements.txt
+#
+# 说明：新版的文献 Agent 只依赖这 6 个包——不需要 langchain，
+# 模型调用直接用 httpx 打 Ollama / OpenAI 兼容接口，安装体积小很多。
+
+langgraph>=1.0.0,<2.0
+httpx>=0.28.1
+python-dotenv>=1.0.0
+streamlit>=1.30.0
+pymupdf>=1.24.0,<2.0
+typing-extensions>=4.8.0

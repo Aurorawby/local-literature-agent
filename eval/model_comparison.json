@@ -1,0 +1,100 @@
+{
+  "qwen2.5:3b": [
+    {
+      "arxiv_id": "2305.10601",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Model",
+      "elapsed_s": 8.7,
+      "echo_fields": [],
+      "blank_fields": [
+        "data",
+        "findings",
+        "limitations"
+      ],
+      "valid_fields": 2,
+      "extract": {
+        "problem": "现有语言模型在推理过程中受限于token-level决策",
+        "method": "引入Tree of Thoughts框架，扩展Chain of Thought方法",
+        "data": "未提及",
+        "findings": "未提及",
+        "limitations": "未提及"
+      }
+    },
+    {
+      "arxiv_id": "2201.11903",
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "elapsed_s": 15.3,
+      "echo_fields": [],
+      "blank_fields": [],
+      "valid_fields": 5,
+      "extract": {
+        "problem": "如何通过链式思维提高大型语言模型的复杂推理能力",
+        "method": "提供链式思维示例作为提示",
+        "data": "三种大型语言模型",
+        "findings": "改善了算术、常识和符号推理任务的性能",
+        "limitations": "未提及局限性"
+      }
+    },
+    {
+      "arxiv_id": "2203.11171",
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Model",
+      "elapsed_s": 13.9,
+      "echo_fields": [],
+      "blank_fields": [],
+      "valid_fields": 5,
+      "extract": {
+        "problem": "语言模型在复杂推理任务上的性能提升问题",
+        "method": "自一致性策略",
+        "data": "预训练的大语言模型",
+        "findings": "自一致性策略提高了语言模型的链式思考推理能力",
+        "limitations": "未提及局限"
+      }
+    }
+  ],
+  "qwen2.5:7b": [
+    {
+      "arxiv_id": "2305.10601",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Model",
+      "elapsed_s": 46.8,
+      "echo_fields": [],
+      "blank_fields": [],
+      "valid_fields": 5,
+      "extract": {
+        "problem": "现有语言模型在需要探索或前瞻决策的任务中表现不佳",
+        "method": "引入Tree of Thoughts框架",
+        "data": "摘要未提及",
+        "findings": "Tree of Thoughts框架能促进语言模型在文本单元上的探索",
+        "limitations": "摘要未提及"
+      }
+    },
+    {
+      "arxiv_id": "2201.11903",
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "elapsed_s": 33.3,
+      "echo_fields": [],
+      "blank_fields": [],
+      "valid_fields": 5,
+      "extract": {
+        "problem": "提高大型语言模型进行复杂推理的能力",
+        "method": "链式思维提示方法",
+        "data": "三个大型语言模型",
+        "findings": "链式思维提示在算术、常识和符号推理任务上表现优异",
+        "limitations": "摘要未提及"
+      }
+    },
+    {
+      "arxiv_id": "2203.11171",
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Model",
+      "elapsed_s": 26.9,
+      "echo_fields": [],
+      "blank_fields": [],
+      "valid_fields": 5,
+      "extract": {
+        "problem": "复杂推理任务中链式推理表现不佳",
+        "method": "提出自一致性解码策略",
+        "data": "预训练大型语言模型",
+        "findings": "自一致性策略能提高链式推理准确性",
+        "limitations": "摘要未提及"
+      }
+    }
+  ]
+}
