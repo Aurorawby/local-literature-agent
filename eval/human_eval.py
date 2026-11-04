@@ -29,7 +29,7 @@ POOL = OUT_DIR / "human_eval_pool.json"
 LABELS = OUT_DIR / "lit_labels.json"
 LLM_CACHE = OUT_DIR / "llm_scores.json"
 RESULTS = OUT_DIR / "human_eval_results.json"
-REPORT = OUT_DIR / "HUMAN_EVAL.md"
+REPORT = OUT_DIR / "HUMAN_EVAL.auto.md"
 
 WIDE_THRESHOLD = 2   # 人工宽口径：label >= 2 视为相关
 TOPK = 10
