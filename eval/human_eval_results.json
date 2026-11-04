@@ -1,0 +1,300 @@
+{
+ "meta": {
+  "generated": "2026-11-04 00:48",
+  "wide_threshold": 2,
+  "pool": 201,
+  "labeled": 201
+ },
+ "human_precision": {
+  "b1": {
+   "wide_mean_p10": 84.0,
+   "topics_fully_covered": 10,
+   "per_topic": [
+    {
+     "id": "llm_finance",
+     "topic": "大语言模型在金融风控中的应用",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "esg",
+     "topic": "ESG 投资与企业绩效",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "intl_finance",
+     "topic": "国际金融风险传导",
+     "p": 80.0,
+     "covered": 10
+    },
+    {
+     "id": "supply_chain",
+     "topic": "供应链韧性",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "solid_battery",
+     "topic": "固态电池界面稳定性",
+     "p": 90.0,
+     "covered": 10
+    },
+    {
+     "id": "medical_seg",
+     "topic": "医学影像分割的深度学习方法",
+     "p": 90.0,
+     "covered": 10
+    },
+    {
+     "id": "edu_llm",
+     "topic": "大语言模型在教育中的应用",
+     "p": 60.0,
+     "covered": 10
+    },
+    {
+     "id": "data_market",
+     "topic": "数据要素市场化",
+     "p": 70.0,
+     "covered": 10
+    },
+    {
+     "id": "carbon",
+     "topic": "碳中和政策对企业的影响",
+     "p": 90.0,
+     "covered": 10
+    },
+    {
+     "id": "chip",
+     "topic": "先进制程芯片制造与出口管制",
+     "p": 60.0,
+     "covered": 10
+    }
+   ],
+   "strict_mean_p10": 50.0
+  },
+  "b3": {
+   "wide_mean_p10": 84.0,
+   "topics_fully_covered": 10,
+   "per_topic": [
+    {
+     "id": "llm_finance",
+     "topic": "大语言模型在金融风控中的应用",
+     "p": 90.0,
+     "covered": 10
+    },
+    {
+     "id": "esg",
+     "topic": "ESG 投资与企业绩效",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "intl_finance",
+     "topic": "国际金融风险传导",
+     "p": 80.0,
+     "covered": 10
+    },
+    {
+     "id": "supply_chain",
+     "topic": "供应链韧性",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "solid_battery",
+     "topic": "固态电池界面稳定性",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "medical_seg",
+     "topic": "医学影像分割的深度学习方法",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "edu_llm",
+     "topic": "大语言模型在教育中的应用",
+     "p": 90.0,
+     "covered": 10
+    },
+    {
+     "id": "data_market",
+     "topic": "数据要素市场化",
+     "p": 100.0,
+     "covered": 10
+    },
+    {
+     "id": "carbon",
+     "topic": "碳中和政策对企业的影响",
+     "p": 10.0,
+     "covered": 10
+    },
+    {
+     "id": "chip",
+     "topic": "先进制程芯片制造与出口管制",
+     "p": 70.0,
+     "covered": 10
+    }
+   ],
+   "strict_mean_p10": 61.0
+  },
+  "b0": {
+   "note": "B0 仅取每主题前 4 篇标注（P@4，与 P@10 口径不同，只看量级差异）",
+   "mean_p4": 67.5,
+   "per_topic": [
+    {
+     "id": "llm_finance",
+     "p": 0.0,
+     "covered": 4
+    },
+    {
+     "id": "esg",
+     "p": 50.0,
+     "covered": 4
+    },
+    {
+     "id": "intl_finance",
+     "p": 25.0,
+     "covered": 4
+    },
+    {
+     "id": "supply_chain",
+     "p": 100.0,
+     "covered": 4
+    },
+    {
+     "id": "solid_battery",
+     "p": 100.0,
+     "covered": 4
+    },
+    {
+     "id": "medical_seg",
+     "p": 100.0,
+     "covered": 4
+    },
+    {
+     "id": "edu_llm",
+     "p": 50.0,
+     "covered": 4
+    },
+    {
+     "id": "data_market",
+     "p": 100.0,
+     "covered": 4
+    },
+    {
+     "id": "carbon",
+     "p": 100.0,
+     "covered": 4
+    },
+    {
+     "id": "chip",
+     "p": 50.0,
+     "covered": 4
+    }
+   ]
+  }
+ },
+ "rule_vs_human": {
+  "confusion": {
+   "tp": 73,
+   "fp": 1,
+   "tn": 38,
+   "fn": 89
+  },
+  "precision": 98.6,
+  "recall": 45.1,
+  "agreement_pct": 55.2,
+  "kappa": 0.229
+ },
+ "llm_vs_human": {
+  "enabled": true,
+  "n": 201,
+  "exact_agree_pct": 41.3,
+  "tolerance_agree_pct": 87.1,
+  "kappa_vs_human": 0.152,
+  "precision_vs_human": 83.1,
+  "recall_vs_human": 79.0
+ },
+ "b1_vs_b3_golden": {
+  "n_topics": 10,
+  "b1_mean": 84.0,
+  "b3_mean": 84.0,
+  "b3_wins": 5,
+  "b1_wins": 2,
+  "rows": [
+   {
+    "id": "llm_finance",
+    "topic": "大语言模型在金融风控中的应用",
+    "b1": 100.0,
+    "b3": 90.0,
+    "diff_b3_minus_b1": -10.0
+   },
+   {
+    "id": "esg",
+    "topic": "ESG 投资与企业绩效",
+    "b1": 100.0,
+    "b3": 100.0,
+    "diff_b3_minus_b1": 0.0
+   },
+   {
+    "id": "intl_finance",
+    "topic": "国际金融风险传导",
+    "b1": 80.0,
+    "b3": 80.0,
+    "diff_b3_minus_b1": 0.0
+   },
+   {
+    "id": "supply_chain",
+    "topic": "供应链韧性",
+    "b1": 100.0,
+    "b3": 100.0,
+    "diff_b3_minus_b1": 0.0
+   },
+   {
+    "id": "solid_battery",
+    "topic": "固态电池界面稳定性",
+    "b1": 90.0,
+    "b3": 100.0,
+    "diff_b3_minus_b1": 10.0
+   },
+   {
+    "id": "medical_seg",
+    "topic": "医学影像分割的深度学习方法",
+    "b1": 90.0,
+    "b3": 100.0,
+    "diff_b3_minus_b1": 10.0
+   },
+   {
+    "id": "edu_llm",
+    "topic": "大语言模型在教育中的应用",
+    "b1": 60.0,
+    "b3": 90.0,
+    "diff_b3_minus_b1": 30.0
+   },
+   {
+    "id": "data_market",
+    "topic": "数据要素市场化",
+    "b1": 70.0,
+    "b3": 100.0,
+    "diff_b3_minus_b1": 30.0
+   },
+   {
+    "id": "carbon",
+    "topic": "碳中和政策对企业的影响",
+    "b1": 90.0,
+    "b3": 10.0,
+    "diff_b3_minus_b1": -80.0
+   },
+   {
+    "id": "chip",
+    "topic": "先进制程芯片制造与出口管制",
+    "b1": 60.0,
+    "b3": 70.0,
+    "diff_b3_minus_b1": 10.0
+   }
+  ]
+ }
+}

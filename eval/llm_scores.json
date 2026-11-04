@@ -1,0 +1,1007 @@
+{
+ "pfbb1032c94": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "AI-Driven Fraud Detection in Payments Using Transformer-Base"
+ },
+ "p2ce293dca3": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Feature Selection in a Credit Scoring Model"
+ },
+ "p132ffdb993": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Validating Large Language Model Annotations"
+ },
+ "pa7c238a062": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Quantifying Deregulation and its Economic Effects: A Large L"
+ },
+ "p31a33dd4db": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Transformer-Based Anomaly Detection for First-Party Fraud Pa"
+ },
+ "p8fa979dcbb": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "IWSL Model: A Novel Credit Scoring Model With Interpretable "
+ },
+ "p693ee7cc64": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Human–AI hybrid finance: from AI tools to decision systems"
+ },
+ "pd215873bee": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "AgentLeak: A Benchmark for Internal-Channel Privacy Leakage "
+ },
+ "p34a15c7887": {
+  "score": 3,
+  "topic": "llm_finance",
+  "title": "Supply Chain Finance Credit Risk Assessment Based on LLM Enh"
+ },
+ "p01febc6a9c": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Contamination Percolation in Multi-Agent LLM Systems: A Meas"
+ },
+ "p03a5ae78da": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "CreditR1: Calibration-Aware Reinforcement Learning for Inter"
+ },
+ "pe89b0e7052": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Transformer-based NLP approaches for credit risk prediction:"
+ },
+ "pdb5fc02bf5": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "From Citations to Contributions: LLM-Assisted Credit Scoring"
+ },
+ "p6b3c4c1225": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Communicating Credit Risk with Large Language Models: Evalua"
+ },
+ "p037d23360f": {
+  "score": 3,
+  "topic": "llm_finance",
+  "title": "Credit risk prediction and heterogeneity analysis for SMEs b"
+ },
+ "p82a04aa113": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Robustness of Big Language Modeling in Finance"
+ },
+ "p81ad53fda4": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Assessing Consistency and Reproducibility in the Outputs of "
+ },
+ "p534c6ac73f": {
+  "score": 3,
+  "topic": "llm_finance",
+  "title": "Standard Benchmarks Fail -- Auditing LLM Agents in Finance M"
+ },
+ "p3602da455b": {
+  "score": 3,
+  "topic": "llm_finance",
+  "title": "A Large Language Model for Corporate Credit Scoring"
+ },
+ "pae86235aab": {
+  "score": 3,
+  "topic": "edu_llm",
+  "title": "大语言模型在\"Python程序设计基础\"课程教学中的应用"
+ },
+ "pfc7e5306f0": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "大语言模型在商务日语教学的互动语用情境中的应用研究"
+ },
+ "p16c5dc84a6": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "大型语言模型在学术写作中的应用与挑战：以ChatGPT为例"
+ },
+ "p835377a086": {
+  "score": 1,
+  "topic": "llm_finance",
+  "title": "基于大语言模型的人工智能在数字孪生技术中的应用融合与展望"
+ },
+ "p8c6848fda8": {
+  "score": 2,
+  "topic": "llm_finance",
+  "title": "Interpretable LLMs for Credit Risk: A Systematic Review and "
+ },
+ "p2c40a86b32": {
+  "score": 3,
+  "topic": "llm_finance",
+  "title": "Credit Risk Meets Large Language Models: Building a Risk Ind"
+ },
+ "p51a4d80e5b": {
+  "score": 3,
+  "topic": "esg",
+  "title": "Demystifying the relationship between ESG and SDG performanc"
+ },
+ "pd41b6af734": {
+  "score": 1,
+  "topic": "esg",
+  "title": "ESG ratings and stock performance in the internet industry"
+ },
+ "pda8b6204e2": {
+  "score": 1,
+  "topic": "esg",
+  "title": "ESG practices disclosure and initial performance of Malaysia"
+ },
+ "p556b6b9bc0": {
+  "score": 2,
+  "topic": "esg",
+  "title": "Do the ESG performance metrics mitigate managerial discretio"
+ },
+ "p793883ad5b": {
+  "score": 2,
+  "topic": "esg",
+  "title": "MONITORING ACCORDING TO ESG PRINCIPLES AND ITS IMPACT ON THE"
+ },
+ "p03fc43a087": {
+  "score": 1,
+  "topic": "esg",
+  "title": "ESG performance and corporate financial performance in China"
+ },
+ "p0046d2c5c7": {
+  "score": 1,
+  "topic": "esg",
+  "title": "The Impact of ESG Ratings on Corporate Value"
+ },
+ "pa968d27da6": {
+  "score": 2,
+  "topic": "esg",
+  "title": "From Text Analysis to Metrics: AI Approaches to ESG Assessme"
+ },
+ "p81877ea0c7": {
+  "score": 2,
+  "topic": "esg",
+  "title": "An integrated assessment framework for mining project invest"
+ },
+ "p513431dc8d": {
+  "score": 1,
+  "topic": "esg",
+  "title": "ESG competitiveness assessment metrics of companies"
+ },
+ "pce2c64fc6e": {
+  "score": 1,
+  "topic": "esg",
+  "title": "数字技术投资对建筑企业绩效的影响研究"
+ },
+ "pe821b90c2b": {
+  "score": 2,
+  "topic": "esg",
+  "title": "ESG 得分与企业财务绩效——基于企业内部控制的中介效应"
+ },
+ "pc9816bbbbb": {
+  "score": 1,
+  "topic": "esg",
+  "title": "ESG 表现对企业绩效的影响效应"
+ },
+ "p2a8bae4efa": {
+  "score": 2,
+  "topic": "esg",
+  "title": "业财融合下药企研发投入绩效评价与增效路径"
+ },
+ "pd899a1a3eb": {
+  "score": 2,
+  "topic": "esg",
+  "title": "Measuring Sustainability Intention of ESG Fund Disclosure us"
+ },
+ "pdce35500f7": {
+  "score": 2,
+  "topic": "esg",
+  "title": "An exploratory study on the impact of ESG on business perfor"
+ },
+ "p4398b4f056": {
+  "score": 1,
+  "topic": "esg",
+  "title": "The Impact of Green Investment, ESG Disclosure, and Financia"
+ },
+ "pe39e532b3d": {
+  "score": 1,
+  "topic": "esg",
+  "title": "The Impact of ESG Practices on the Actualization of Fundamen"
+ },
+ "p585f03ee86": {
+  "score": 1,
+  "topic": "esg",
+  "title": "Work-related stress as a material ESG issue: a single-compan"
+ },
+ "pdc070c2179": {
+  "score": 2,
+  "topic": "esg",
+  "title": "A bibliometric analysis of sustainable development goals and"
+ },
+ "pdef6b96d5f": {
+  "score": 2,
+  "topic": "esg",
+  "title": "From Strategy and ESG to Shareholder Value: The Mediating Ro"
+ },
+ "p710be8c192": {
+  "score": 2,
+  "topic": "esg",
+  "title": "Predicting mutual fund performance with machine learning: Ar"
+ },
+ "p9a82eb07cd": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Quantifying Impact, Uncovering Trends: A Comprehensive Bibli"
+ },
+ "p6c3502848e": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "The Transmission of Climate Shocks to Financial Risk in Moro"
+ },
+ "pfb99f1e92a": {
+  "score": 1,
+  "topic": "intl_finance",
+  "title": "Financial Market Contagion and Risk Transmission Across Glob"
+ },
+ "p675b42aeeb": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "How Does Climate Risk Affect the Cost of Debt in Chinese A-S"
+ },
+ "p27fb89a1cb": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "A Heun Equation-Based Digital Twin Framework for Dynamic Fin"
+ },
+ "p45383bd5f1": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Carbon Markets and Financial Risk Assessment under Global Cl"
+ },
+ "p3c73b8d0c9": {
+  "score": 3,
+  "topic": "intl_finance",
+  "title": "FINANCIAL STABILITY AND RISK RESILIENCE OF UZBEKISTAN’S BANK"
+ },
+ "p6fd17313c2": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Corporate Financial Management, Risk Assessment, and Investm"
+ },
+ "p0902f261f4": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Financial Contagion and Oil Crisis : A Factor Analysis"
+ },
+ "p07e6fdbb1a": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Financial Risk Management in Global Expansion: Which Market "
+ },
+ "p73f0de956f": {
+  "score": 1,
+  "topic": "intl_finance",
+  "title": "Toward a Public-Sector Resilience Reporting Standard for Low"
+ },
+ "p2a046f24cf": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Evaluating the spillover effects of FTSE4Good USA index: a s"
+ },
+ "p6816713991": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "Financial climate risk: a review of recent advances and key "
+ },
+ "p6ab6f04f01": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "地方本科院校《金融风险管理》课程教学改革研究"
+ },
+ "p5efba1d3c6": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "我国互联网金融风险分析及监管对策研究"
+ },
+ "p717dbd5377": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "人民币国际化视角下的跨境电商供应链金融风险管理研究"
+ },
+ "p17fadec4c8": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "金融机构风险管理与内部控制研究"
+ },
+ "p777e4efdd1": {
+  "score": 2,
+  "topic": "intl_finance",
+  "title": "The Physics of Financial Networks"
+ },
+ "pac74ed3c26": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "SME supply chain resilience in disruptive times: the effects"
+ },
+ "pe6f14a12da": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "The impact of supply chain transparency and supply chain res"
+ },
+ "pde56af3a7c": {
+  "score": 2,
+  "topic": "supply_chain",
+  "title": "The silver lining of supply chain complexity: building suppl"
+ },
+ "p80405ada19": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "Examining Factors Influencing Supply Chain Robustness and Su"
+ },
+ "p157a54a9d4": {
+  "score": 2,
+  "topic": "supply_chain",
+  "title": "Heeding supply chain disruption warnings: When and how do cr"
+ },
+ "p4babfa8d91": {
+  "score": 3,
+  "topic": "supply_chain",
+  "title": "From Green Supply Chain Management to Supply Chain Viability"
+ },
+ "pc785399270": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "Supply Chain Digitalization and Supply Chain Resilience in M"
+ },
+ "p1cb57aad96": {
+  "score": 2,
+  "topic": "supply_chain",
+  "title": "The Role of Supply Chain Risk Management in Shaping Supply C"
+ },
+ "p9d1d57c8f2": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "THE IMPACT OF DIGITAL TRANSFORMATION ON SUPPLY CHAIN PERFORM"
+ },
+ "p979b681e57": {
+  "score": 2,
+  "topic": "supply_chain",
+  "title": "Resilient and flexible biopharmaceutical supply networks: st"
+ },
+ "p3fd9b2d9f1": {
+  "score": 1,
+  "topic": "supply_chain",
+  "title": "多主体参与下核电项目供应链韧性管理研究"
+ },
+ "pb95f9def0c": {
+  "score": 3,
+  "topic": "supply_chain",
+  "title": "安全与发展互构下中国—东南亚应急合作与供应链韧性"
+ },
+ "paf82459729": {
+  "score": 3,
+  "topic": "supply_chain",
+  "title": "中国植物油进口贸易效率与潜力研究 ——基于随机前沿引力模型Research on the efficiency and "
+ },
+ "p81bb348533": {
+  "score": 3,
+  "topic": "supply_chain",
+  "title": "全球大豆油贸易网络时空演化及韧性特征研究Spatio-temporal evolution and resilience"
+ },
+ "p41847240cb": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "Interface‐Targeting Carrier‐Catalytic Integrated Design Cont"
+ },
+ "pc87e37f343": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Interface Stability between Na3Zr2Si2PO12 Solid Electrolyte "
+ },
+ "pdfd5378cf9": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "AES lithium chemical mapping in buried interface of all‐soli"
+ },
+ "p42c12d353b": {
+  "score": 1,
+  "topic": "solid_battery",
+  "title": "Improving the Stability of Lithium Aluminum Germanium Phosph"
+ },
+ "p7d3ec2d2e4": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Autonomous disulfide-crosslinked PEGDA solid polymer electro"
+ },
+ "p5963e9d432": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Electrochemical stability and lithium insertion at the Li|Li"
+ },
+ "p9a7a801d3a": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "Synergistic Interface Stability and High Room-Temperature Io"
+ },
+ "pc25e2787c1": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Helium Bubbles in Liquid Lead Lithium Solutions: Pressure In"
+ },
+ "pf3b7f40c4b": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Robust All-Solid-State Batteries with Sodium Ion Electrolyte"
+ },
+ "pd7684b3394": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Induction Effect of Fluorine-Grafted Polymer-Based Electroly"
+ },
+ "p66ef665550": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "Subsurface Vacancy Engineering Enables Atomically Clean and "
+ },
+ "pc7a721634c": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Defect Engineered Hexagonal-Boron Nitride Enables Ionic Cond"
+ },
+ "p60c56c58e3": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "(Digital Presentation) Engineering Lithium Metal/Polymer Ele"
+ },
+ "p8cabee744d": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Controlling moving interfaces in solid state batteries"
+ },
+ "p3f6dc71569": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Interfacial performance evolution of ceramics-in-polymer com"
+ },
+ "p79a959e348": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "Interface Engineering of a NASICON-Type Electrolyte Using Ul"
+ },
+ "p2e60d0ed3d": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "锂基电池固态电解质界面改性及其界面稳定性与性能调控研究"
+ },
+ "p33146e4802": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "<b>钠离子电池硬碳负极固态电解质界面膜调控机制及人工固态电解质界面膜的构筑研究</b>"
+ },
+ "p3f0d71911b": {
+  "score": 3,
+  "topic": "solid_battery",
+  "title": "基于人工界面膜修饰的强化型锂-铋负极用于稳定锂金属电池"
+ },
+ "p3b96d18573": {
+  "score": 2,
+  "topic": "solid_battery",
+  "title": "A strong Lewis acid imparts high ionic conductivity and inte"
+ },
+ "pb7fef65f2c": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Semi-Supervised Medical Image Segmentation Based on Deep Con"
+ },
+ "p70bf102670": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "MIScnn: a framework for medical image segmentation with conv"
+ },
+ "p96c3e8d3d7": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "A Review on Deep Learning Architecture and Methods for MRI B"
+ },
+ "p819ef50231": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Application of deep learning in medical imaging segmentation"
+ },
+ "p5f159c4fb6": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Demystifying Artificial Intelligence: A Systematic Review of"
+ },
+ "pfc4a2706b0": {
+  "score": 1,
+  "topic": "medical_seg",
+  "title": "Deep learning for cardiac CT segmentation for congenital hea"
+ },
+ "p4393544076": {
+  "score": 1,
+  "topic": "medical_seg",
+  "title": "Explainable deep learning-based lung cancer diagnosis using "
+ },
+ "pb02b141fb6": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "A knowledge distillation framework integrating Grad-CAM in R"
+ },
+ "p684ab6fb6f": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Dual-Stream Contrastive Learning for Medical Visual Represen"
+ },
+ "p3d112634be": {
+  "score": 1,
+  "topic": "medical_seg",
+  "title": "Comparative Analysis of Hybrid Attention and Progressive Lay"
+ },
+ "pf221e9d4db": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "DG-TTA: Out-of-Domain Medical Image Segmentation Through Aug"
+ },
+ "p4b4a415065": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "Deep structured learning with vision intelligence for oral c"
+ },
+ "pf8e5a41aee": {
+  "score": 1,
+  "topic": "medical_seg",
+  "title": "MedSegNet10: A Publicly Accessible Network Repository for Sp"
+ },
+ "p39d5f7a63c": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "HiDiff: Hybrid Diffusion Framework for Medical Image Segment"
+ },
+ "p3e7c7fb809": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "U-Net in Medical Image Segmentation: A Review of Its Applica"
+ },
+ "pc1ea9aafa1": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Exploring Transfer Learning in Medical Image Segmentation us"
+ },
+ "pdecdf8168d": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Medical Image Segmentation with Domain Adaptation: A Survey"
+ },
+ "p094c596cff": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "基于深度学习的医学图像合成：方法、应用与未来方向"
+ },
+ "pa34a555018": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "基于深度学习的医疗影像病灶分割与辅助诊断研究"
+ },
+ "pe897a664cd": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "人工智能在颈椎病诊断中的创新与突破"
+ },
+ "pb2b8b24b19": {
+  "score": 3,
+  "topic": "medical_seg",
+  "title": "基于深度学习在T2Flair图像分割脑胶质瘤病灶的研究"
+ },
+ "pd76ee3f516": {
+  "score": 2,
+  "topic": "medical_seg",
+  "title": "Diminishing Uncertainty within the Training Pool: Active Lea"
+ },
+ "pe682f643ec": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Integrating AI Literacy in Chemistry Graduate Education: Har"
+ },
+ "p546b6c48d8": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "APPLICATION OF LLM IN UAV ROUTE PLANNING TASKS TO PREVENT DA"
+ },
+ "p8209f5daf1": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "An Explainable Large Language Model Framework for Personaliz"
+ },
+ "pbadf34b98b": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "The Application of a Large Language Model (LLM) in Education"
+ },
+ "pc08019c589": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "Development of an Conversational LLM-Based Conversational AI"
+ },
+ "p025b35e351": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "Analysis of Inserted Transformer Installation to Reduce Dist"
+ },
+ "p947bbdaed2": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Clean Accuracy Versus Robustness: Rank Shifts in CNN and Vis"
+ },
+ "p4793a0a19e": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "Unexplained distribution transformer failures: Revealing the"
+ },
+ "p66bf59e5ef": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Exploring the potential of LLM-based customized test item ge"
+ },
+ "pdc7d80dae8": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Model of Immersive Learning in Language Education (MILLE)"
+ },
+ "p47de3d0a3d": {
+  "score": 1,
+  "topic": "edu_llm",
+  "title": "A Systematical Study of LLM-based Application on Education"
+ },
+ "p128c0207ff": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Education for Sustainable Development: A Social Transformer "
+ },
+ "pe5d9066edf": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Large Language Model–Assisted Thematic Coding in Medical Edu"
+ },
+ "pa33268ef06": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "LLM Prompt Evaluation for Educational Applications"
+ },
+ "p0547a0adbe": {
+  "score": 2,
+  "topic": "edu_llm",
+  "title": "Small Language Models Reshape Higher Education: Courses, Tex"
+ },
+ "p9157471cdb": {
+  "score": 3,
+  "topic": "edu_llm",
+  "title": "The role of large language models in personalized learning: "
+ },
+ "p54298115e2": {
+  "score": 3,
+  "topic": "edu_llm",
+  "title": "大语言模型在古典诗词教学中的应用研究——以Deepseek七言絕句创作与格律認知為例"
+ },
+ "p1f5ef7d453": {
+  "score": 3,
+  "topic": "edu_llm",
+  "title": "The application prospect and thinking of ChatGPT in the stan"
+ },
+ "p64baee22eb": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Data element investment strategy: How can leaders and follow"
+ },
+ "peb3374cc25": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Exploring the impact of data element market development on s"
+ },
+ "p2b3b2944b9": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "AI Risk Bonds: a market-based mechanism for governing liabil"
+ },
+ "p6ee0f6b20f": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "Data Elements and Trustworthy Circulation: A Clearing and Se"
+ },
+ "pc4e771be09": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Pharmaceutical Data and Market Exclusivity: Mechanism and En"
+ },
+ "pbfc2811db7": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "Data-Factor Marketization and Corporate Green Development Pe"
+ },
+ "p434935e0be": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "The impacts of data trading platform on residents' cultural "
+ },
+ "pa05e44dfca": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Does communication increase investors’ trading frequency? Ev"
+ },
+ "p32793e9986": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Data Collection and Trading Strategy Analysis of Stackelberg"
+ },
+ "p0d93995f4d": {
+  "score": 1,
+  "topic": "data_market",
+  "title": "Data Elements and Enterprise Supply Chain Resilience: Eviden"
+ },
+ "p8c5d1735f4": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "The Influence Mechanism of Data Market Regulation and New Qu"
+ },
+ "pccf7800f11": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Data on the Move: Traffic-Oriented Data Trading Platform Pow"
+ },
+ "p99a8548648": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Privacy-protected crowd-sensed data trading algorithm"
+ },
+ "p1f53ad2cb3": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "An Incentive Mechanism for Trading Personal Data in Data Mar"
+ },
+ "p900657d539": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "BDTF: A Blockchain-Based Data Trading Framework with Trusted"
+ },
+ "p18c9a080ea": {
+  "score": 2,
+  "topic": "data_market",
+  "title": "Online Pricing with Reserve Price Constraint for Personal Da"
+ },
+ "p88fe24b4ce": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "数据要素市场化对企业数字化转型的影响研究"
+ },
+ "p857fc39c84": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "基于市场扭曲的资本、劳动和数据要素对区域碳排放绩效的影响研究"
+ },
+ "p4a7e1bfabb": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "数据要素市场建设对数字经济高质量发展的多维度研究"
+ },
+ "pd19a7ee004": {
+  "score": 3,
+  "topic": "data_market",
+  "title": "场景驱动数据要素流通交易与价值化体系探究"
+ },
+ "pbb6014de59": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Assessment of Policy Benefit Configurations of Net-Zero Emis"
+ },
+ "p51dd279410": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Impact of carbon price on Indonesia’s power sector up to 205"
+ },
+ "pc33bfc6a5e": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "The policy effect of green finance reform and innovations: E"
+ },
+ "p382e222188": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "PUBLIC POLICY FRAMEWORKS FOR PROMOTING GREEN INNOVATION: IMP"
+ },
+ "pb34b32ca1c": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Research on the Impact of Financing Constraints on Environme"
+ },
+ "p05c594eaa8": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Managing the Effect of Green Fiscal Policy on Firm Energy Pe"
+ },
+ "p8be7aa6e51": {
+  "score": 3,
+  "topic": "carbon",
+  "title": "Going green or green-washing: The impact of CBAM on Chinese "
+ },
+ "pd7079c2bfc": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "The impact of carbon risk on corporate market value: evidenc"
+ },
+ "p7a9a6a2345": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Board Governance and SDG Disclosure: Evidence from Regional "
+ },
+ "pa16a584455": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Mapping green tax impact on environmental social and governa"
+ },
+ "p1d497cb41a": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Leveraging technology, renewable energy and digital tools fo"
+ },
+ "p4fe19a8c81": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Does the removal of fuel subsidies influence the willingness"
+ },
+ "p254b1ea614": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "The Impact of Renewable Energy Communities in the Italian Da"
+ },
+ "pfa56000a9a": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Increasing the productivity of manufacturing firms in Camero"
+ },
+ "p45117fe320": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "Diaspora Remittances, Renewable Energy and Enterprise Growth"
+ },
+ "p4072c1fc93": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Evaluation of the Economic Profitability of Using Renewable "
+ },
+ "p881234f89f": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "Sustainable Business Strategies as an Element Influencing Di"
+ },
+ "p84e8fc5d1e": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "From Socialist Industrialisation to Environmental, Social, a"
+ },
+ "p5add169fba": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "The Influence of Digital Enablers on Affordable and Clean En"
+ },
+ "ped1d534c00": {
+  "score": 1,
+  "topic": "carbon",
+  "title": "企业所得税优惠政策对企业研发投入的影响"
+ },
+ "pe855905346": {
+  "score": 3,
+  "topic": "carbon",
+  "title": "中国绿色信贷政策对企业环境绩效的影响研究"
+ },
+ "p6d822c15b2": {
+  "score": 2,
+  "topic": "carbon",
+  "title": "多元化视角下山西省煤炭企业转型研究"
+ },
+ "p8a51603dd9": {
+  "score": 3,
+  "topic": "carbon",
+  "title": "基于清单编制法的中国碳市场免费碳配额分布平衡分析"
+ },
+ "p089cf4c14a": {
+  "score": 2,
+  "topic": "chip",
+  "title": "The Geopolitical Rivalry behind US Chip Export Controls and "
+ },
+ "p52c035c182": {
+  "score": 1,
+  "topic": "chip",
+  "title": "Research on the Impact of the U.S. Export Controls on the Fi"
+ },
+ "p8e5febca16": {
+  "score": 2,
+  "topic": "chip",
+  "title": "CHIPS for America, National Advanced Packaging Manufacturing"
+ },
+ "p25957fb27b": {
+  "score": 1,
+  "topic": "chip",
+  "title": "Veterinary Drug Residue Regulations in Major U.S. Export Mar"
+ },
+ "p6cc2c2e7c1": {
+  "score": 1,
+  "topic": "chip",
+  "title": "Semiconductor Equipment Export Controls —Did China's Imports"
+ },
+ "pe157f10316": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Determinants of Export Competitiveness of the Manufacturing "
+ },
+ "pe8da97f5ee": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Geoeconomic Exposure and EU Industrial Policy: Export Depend"
+ },
+ "pe13a69d38e": {
+  "score": 1,
+  "topic": "chip",
+  "title": "Undermining the Consensus-Building and List-Based Standards "
+ },
+ "padf0256ecc": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Are There the Impacts of Environmental Regulations on Manufa"
+ },
+ "p3315ab80ae": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Utilization of Customs Regulations Related to Import Export "
+ },
+ "pb16443637c": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Near-Term Enforcement of AI Chip Export Controls Using A Fir"
+ },
+ "pd2e4a3a6b9": {
+  "score": 1,
+  "topic": "chip",
+  "title": "增材制造与先进制造教学改革与课程思政"
+ },
+ "p53a7c09888": {
+  "score": 1,
+  "topic": "chip",
+  "title": "机电工程成本控制与进度管理研究"
+ },
+ "p2307ba1ee2": {
+  "score": 2,
+  "topic": "chip",
+  "title": "西门子PLC网络在先进制造生产线的要点分析"
+ },
+ "p7ef7833c73": {
+  "score": 2,
+  "topic": "chip",
+  "title": "面向先进制程的芯片厂房微振动控制技术与工程应用"
+ },
+ "p54c1adb4ba": {
+  "score": 1,
+  "topic": "chip",
+  "title": "China’s semiconductor conundrum: understanding US export con"
+ },
+ "pf5e5f8bdfe": {
+  "score": 2,
+  "topic": "chip",
+  "title": "The impact of export controls on international trade: Eviden"
+ },
+ "pff2694ee1c": {
+  "score": 2,
+  "topic": "chip",
+  "title": "Chips and sanction: The impact of semiconductor export contr"
+ },
+ "pc7e644b106": {
+  "score": 2,
+  "topic": "chip",
+  "title": "A Study on the Pattern of China-U.S. Diplomatic Interaction "
+ }
+}

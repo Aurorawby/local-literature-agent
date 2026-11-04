@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>文献 Agent · 评测总览</title>
+<style>
+  :root{--ink:#1f1b16;--muted:#7a7268;--bg:#f7f2ea;--card:#fff;--line:#eadfd0;--orange:#ff7a45;
+    --orange-soft:#ffe8dc;--blue:#5b7cfa;--green:#12a184;--green-soft:#dcf5ee;--red:#d64545;--red-soft:#fde5e5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);padding:34px 18px 46px;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:28px;margin:0 0 6px} h2{font-size:19px;margin:34px 0 10px}
+  .sub{color:var(--muted);font-size:14px;line-height:1.85;margin:0 0 20px}
+  .card{background:var(--card);border-radius:16px;padding:20px 22px;box-shadow:0 10px 26px rgba(60,42,20,.10);margin-bottom:18px}
+  .brow{display:grid;grid-template-columns:170px 1fr 120px;gap:10px;align-items:center;font-size:13px;margin-bottom:8px}
+  .bl{color:var(--muted);font-weight:600} .btrack{height:14px;background:#f1e8dc;border-radius:99px;overflow:hidden}
+  .bfill{height:100%;border-radius:99px} .bv{font-weight:800;font-size:13.5px}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:10px}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left} th{background:#faf6ef}
+  .insight{font-size:13px;line-height:1.9;background:#faf6ef;border-radius:10px;padding:10px 14px}
+  .warn{background:var(--red-soft)}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:8px 0}
+  .kcard{background:#faf6ef;border-radius:12px;padding:14px;text-align:center}
+  .kv{font-size:26px;font-weight:800;color:var(--orange)} .kk{font-size:11.8px;color:var(--muted);margin-top:4px;line-height:1.6}
+  footer{text-align:center;color:#a89b8a;font-size:12.3px;margin-top:30px;line-height:2}
+</style>
+</head>
+<body><div class="wrap">
+  <h1>📊 文献 Agent · 评测总览</h1>
+  <p class="sub">检索层 A/B（10 主题 × 4 策略 × 重复实验）+ 模型选型实测 + <b>三层评测体系</b>（规则 → 模型打分 → 201 篇人工金标准）；<b>主题级配对 + 95% CI</b>。
+  所有数字可复现：<code>.venv\Scripts\python.exe eval\run_eval.py --repeat 2</code> 等脚本都在仓库 eval/ 目录。</p>
+
+  <h2>① 检索层 A/B：Precision@10（10 主题均值）</h2>
+  <div class="card"><div class="brow"><span class="bl">B0 naive（中文直检）</span><div class="btrack"><div class="bfill" style="width:9%;background:#b8b0a4"></div></div><span class="bv">6.0%</span></div><div class="brow"><span class="bl">B1 检索式</span><div class="btrack"><div class="bfill" style="width:89%;background:#9cb3f7"></div></div><span class="bv">57.5%（±11.0pp）</span></div><div class="brow"><span class="bl">B2 hard（v1）</span><div class="btrack"><div class="bfill" style="width:100%;background:#ffb38a"></div></div><span class="bv">64.5%（±11.0pp）</span></div><div class="brow"><span class="bl">B3 soft（v2 线上）</span><div class="btrack"><div class="bfill" style="width:96%;background:#ff7a45"></div></div><span class="bv">62.0%（±14.0pp）</span></div>
+    <p class="insight"><b>怎么读</b>：B0 → B1（中文主题 → 学术英文检索式 + 多源检索）是唯一稳健的结论——数量级提升，10 主题里 9 个提升；
+    B1 → B2 的 +6pp 落在 ±11-14pp 的重复噪声内，<b>不宣称显著</b>；B2 → B3 的差异同样在噪声内，
+    但评测本身有<b>构念效度问题</b>（判定与机制同源）→ 所以下面用人工金标准重新回答。</p>
+  </div>
+
+  <h2>② 逐主题明细（规则口径）</h2>
+  <div class="card"><table><tr><th>主题</th><th>B0 naive</th><th>B1 检索式</th><th>B2 hard</th><th>B3 soft</th></tr><tr><td>大语言模型在金融风控中的应用</td><td>0.0%</td><td>50.0%</td><td>100.0%</td><td>90.0%</td></tr><tr><td>ESG 投资与企业绩效</td><td>20.0%</td><td>70.0%</td><td>80.0%</td><td>70.0%</td></tr><tr><td>国际金融风险传导</td><td>0.0%</td><td>30.0%</td><td>40.0%</td><td>35.0%</td></tr><tr><td>供应链韧性</td><td>0.0%</td><td>80.0%</td><td>80.0%</td><td>80.0%</td></tr><tr><td>固态电池界面稳定性</td><td>10.0%</td><td>65.0%</td><td>55.0%</td><td>55.0%</td></tr><tr><td>医学影像分割的深度学习方法</td><td>20.0%</td><td>95.0%</td><td>100.0%</td><td>95.0%</td></tr><tr><td>大语言模型在教育中的应用</td><td>10.0%</td><td>60.0%</td><td>90.0%</td><td>90.0%</td></tr><tr><td>数据要素市场化</td><td>0.0%</td><td>80.0%</td><td>55.0%</td><td>55.0%</td></tr><tr><td>碳中和政策对企业的影响</td><td>0.0%</td><td>25.0%</td><td>30.0%</td><td>35.0%</td></tr><tr><td>先进制程芯片制造与出口管制</td><td>0.0%</td><td>20.0%</td><td>15.0%</td><td>15.0%</td></tr></table>
+  <p class="insight">中文政策类主题（如「数据要素市场化」）偏低是真实的检索边界——英文文献少，写进产品说明而不是隐藏。</p></div>
+
+  <h2>③ 模型选型实测（本地 CPU）</h2>
+  <div class="card"><p class="insight">数据见 eval/MODEL_COMPARISON.md</p>
+    <p class="insight">3B vs 7B：字段完整率 80% → 100%，耗时 2.8×——据此设计<b>本地/云端三档切换</b>，而不是拍脑袋选型。</p></div>
+
+  <h2>④ 三层评测体系（本次新增：人工金标准）</h2>
+  <div class="card">
+    <div class="grid3">
+      <div class="kcard"><div class="kv">0.229</div><div class="kk">规则 vs 人工 κ（95% CI 0.156–0.308）</div></div>
+      <div class="kcard"><div class="kv">0.152</div><div class="kk">7B vs 人工 κ；二次加权 κ=0.159</div></div>
+      <div class="kcard"><div class="kv">84.0%</div><div class="kk">B3 人工 P@10（主题级 CI 66–97）</div></div>
+    </div>
+    <p class="insight">混淆矩阵（去重 201 篇）：TP 73 · FP 1 · FN 89 · TN 38 —— 规则精确率 98.6%、召回 45.1%、κ=0.229（CI 0.156–0.308）。<br>只看 B1/B3 实际 top10（n=200）：精确率 98.9%、召回 52.4%、κ=0.246（CI 0.161–0.333）。</p>
+    <p class="insight">配对（10 主题）：宽口径 B1 84.0% vs B3 84.0%，差值 0pp（95% CI −21～+15，p=1.00）；严口径 50% vs 61%，+11pp（CI +1～+22，p=0.125）。10 主题的 MDE≈27pp（宽）/16pp（严）——<b>不显著不等于没差异，是样本不够</b>。</p>
+    <table><tr><th>主题</th><th>B1</th><th>B3(soft)</th><th>差值</th></tr>
+    <tr><td>大语言模型在金融风控中的应用</td><td>100.0%</td><td>90.0%</td><td>-10.0</td></tr><tr><td>ESG 投资与企业绩效</td><td>100.0%</td><td>100.0%</td><td>+0.0</td></tr><tr><td>国际金融风险传导</td><td>80.0%</td><td>80.0%</td><td>+0.0</td></tr><tr><td>供应链韧性</td><td>100.0%</td><td>100.0%</td><td>+0.0</td></tr><tr><td>固态电池界面稳定性</td><td>90.0%</td><td>100.0%</td><td>+10.0</td></tr><tr><td>医学影像分割的深度学习方法</td><td>90.0%</td><td>100.0%</td><td>+10.0</td></tr><tr><td>大语言模型在教育中的应用</td><td>60.0%</td><td>90.0%</td><td>+30.0</td></tr><tr><td>数据要素市场化</td><td>70.0%</td><td>100.0%</td><td>+30.0</td></tr><tr><td>碳中和政策对企业的影响</td><td>90.0%</td><td>10.0%</td><td>-80.0</td></tr><tr><td>先进制程芯片制造与出口管制</td><td>60.0%</td><td>70.0%</td><td>+10.0</td></tr></table>
+    </div>
+
+  <h2>⑤ 统计补充（2026-11-04）</h2>
+  <div class="card">
+    <p class="insight"><b>① B0 不能直接比：</b>旧说“6% vs 67.5%，低估 10 倍”把 P@10 和 P@4 混了；同池同 k（n=40）是人工 67.5% vs 规则 2.5%，方向成立、幅度不能那么说。</p>
+    <p class="insight"><b>② B3 没有赢：</b>宽口径打平（0pp，CI −21～+15，p=1.00）；严口径 +11pp（CI +1～+22，p=0.125），低于 16pp 的 MDE。保留 soft 的理由是“避免硬约束误杀”，不是“已经证明更准”。</p>
+    <p class="insight"><b>③ 护栏只是假设：</b>规则 P@10&lt;50% 回退 B1 后，10 主题均值 84%→91%；但碳中和 +80、芯片 −10 —— <b>均值变好、单主题变差</b>，阈值不能宣称已验证。</p>
+    <p class="insight"><b>④ 只有一位标注者：</b>当前 κ 是“规则/模型 vs 人”，不是标注信度；下一步双标 30 篇（20%）算人类-人类 κ。</p>
+    <p class="insight">完整统计与实验设计卡见 <a href="AB_EXPERIMENT.md"><b>AB_EXPERIMENT.md</b></a>（CI、配对置换、MDE、护栏反事实）。</p>
+  </div>
+
+  <h2>⑥ 诚实口径</h2>
+  <div class="card"><p class="insight">① 规则口径绝对值不可与其他系统比较，只做同条件对比；② 样本 10 主题 + 重复噪声 ±11-14pp，只对数量级差异下结论；
+  ③ 人工标注为单人盲标（防锚定），2 人交叉标注是下一步；④ AI 读综述质量不做自动评测，用引用核验 + 人工抽查兜底。</p></div>
+
+  <footer>eval/report.html · <a href="HUMAN_EVAL.md">HUMAN_EVAL.md</a> · <a href="AB_EXPERIMENT.md">AB_EXPERIMENT.md</a> · 数据由 make_report.py / human_eval_stats.py 生成 · 每个数字都能复现</footer>
+</div></body></html>

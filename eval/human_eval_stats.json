@@ -1,0 +1,350 @@
+{
+  "meta": {
+    "generated": "2026-11-04",
+    "labels": 201,
+    "topics": 10,
+    "note": "B1/B3 人工 P@10 的 95% CI 用主题级 cluster bootstrap；B0 只有 4 篇/主题，不能与 P@10 直接比。"
+  },
+  "human_p10": {
+    "b1_wide": {
+      "value": 84.0,
+      "ci": {
+        "mean": 84.0,
+        "lo": 74.0,
+        "hi": 93.0
+      }
+    },
+    "b3_wide": {
+      "value": 84.0,
+      "ci": {
+        "mean": 84.0,
+        "lo": 66.0,
+        "hi": 97.0
+      }
+    },
+    "b1_strict": {
+      "value": 50.0,
+      "ci": {
+        "mean": 50.0,
+        "lo": 36.0,
+        "hi": 63.0
+      }
+    },
+    "b3_strict": {
+      "value": 61.0,
+      "ci": {
+        "mean": 61.0,
+        "lo": 42.0,
+        "hi": 78.0
+      }
+    }
+  },
+  "b3_minus_b1": {
+    "wide": {
+      "mean": 0.0,
+      "bootstrap": {
+        "mean": 0.0,
+        "lo": -21.0,
+        "hi": 15.0
+      },
+      "permutation_p": 1.0,
+      "wins_b3": 5,
+      "wins_b1": 2,
+      "mde80": 27.370706157414997
+    },
+    "strict": {
+      "mean": 11.0,
+      "bootstrap": {
+        "mean": 11.0,
+        "lo": 1.0,
+        "hi": 22.0
+      },
+      "permutation_p": 0.125,
+      "wins_b3": 5,
+      "wins_b1": 2,
+      "mde80": 15.866666666666667
+    }
+  },
+  "rule_vs_human": {
+    "all_pool": {
+      "tp": 73,
+      "fp": 1,
+      "fn": 89,
+      "tn": 38,
+      "precision": 0.9864864864864865,
+      "recall": 0.4506172839506173,
+      "agreement": 0.5522388059701493,
+      "kappa": 0.22890025575447573,
+      "kappa_ci": {
+        "lo": 0.15641646489104116,
+        "hi": 0.30798122065727696
+      },
+      "n": 201
+    },
+    "b1_b3_top10": {
+      "tp": 88,
+      "fp": 1,
+      "fn": 80,
+      "tn": 31,
+      "precision": 0.9887640449438202,
+      "recall": 0.5238095238095238,
+      "agreement": 0.595,
+      "kappa": 0.24637141793822104,
+      "kappa_ci": {
+        "lo": 0.1605901305748686,
+        "hi": 0.33307926829268286
+      },
+      "n": 200
+    }
+  },
+  "b0_same_pool": {
+    "n_items": 40,
+    "human_wide_p4_computed": 67.5,
+    "rule_wide_p4_computed": 2.5,
+    "n_pairs": 40
+  },
+  "llm_judge": {
+    "n": 201,
+    "exact_pct": 41.29353233830846,
+    "tolerance_pct": 87.06467661691542,
+    "kappa": 0.15232308791994284,
+    "kappa_ci": {
+      "lo": 0.06425221647896487,
+      "hi": 0.23716433941997855
+    },
+    "weighted_kappa_quadratic": 0.15921120027317737,
+    "binary_confusion": {
+      "tp": 128,
+      "fp": 26,
+      "fn": 34,
+      "tn": 13,
+      "precision": 0.8311688311688312,
+      "recall": 0.7901234567901234,
+      "agreement": 0.7014925373134329
+    }
+  },
+  "guardrail_sim": {
+    "rows": [
+      {
+        "id": "llm_finance",
+        "topic": "大语言模型在金融风控中的应用",
+        "rule_p10": 90.0,
+        "b1_human": 100.0,
+        "b3_human": 90.0,
+        "trigger": false,
+        "sim_human": 90.0
+      },
+      {
+        "id": "esg",
+        "topic": "ESG 投资与企业绩效",
+        "rule_p10": 70.0,
+        "b1_human": 100.0,
+        "b3_human": 100.0,
+        "trigger": false,
+        "sim_human": 100.0
+      },
+      {
+        "id": "intl_finance",
+        "topic": "国际金融风险传导",
+        "rule_p10": 35.0,
+        "b1_human": 80.0,
+        "b3_human": 80.0,
+        "trigger": true,
+        "sim_human": 80.0
+      },
+      {
+        "id": "supply_chain",
+        "topic": "供应链韧性",
+        "rule_p10": 80.0,
+        "b1_human": 100.0,
+        "b3_human": 100.0,
+        "trigger": false,
+        "sim_human": 100.0
+      },
+      {
+        "id": "solid_battery",
+        "topic": "固态电池界面稳定性",
+        "rule_p10": 55.0,
+        "b1_human": 90.0,
+        "b3_human": 100.0,
+        "trigger": false,
+        "sim_human": 100.0
+      },
+      {
+        "id": "medical_seg",
+        "topic": "医学影像分割的深度学习方法",
+        "rule_p10": 95.0,
+        "b1_human": 90.0,
+        "b3_human": 100.0,
+        "trigger": false,
+        "sim_human": 100.0
+      },
+      {
+        "id": "edu_llm",
+        "topic": "大语言模型在教育中的应用",
+        "rule_p10": 90.0,
+        "b1_human": 60.0,
+        "b3_human": 90.0,
+        "trigger": false,
+        "sim_human": 90.0
+      },
+      {
+        "id": "data_market",
+        "topic": "数据要素市场化",
+        "rule_p10": 55.0,
+        "b1_human": 70.0,
+        "b3_human": 100.0,
+        "trigger": false,
+        "sim_human": 100.0
+      },
+      {
+        "id": "carbon",
+        "topic": "碳中和政策对企业的影响",
+        "rule_p10": 35.0,
+        "b1_human": 90.0,
+        "b3_human": 10.0,
+        "trigger": true,
+        "sim_human": 90.0
+      },
+      {
+        "id": "chip",
+        "topic": "先进制程芯片制造与出口管制",
+        "rule_p10": 15.0,
+        "b1_human": 60.0,
+        "b3_human": 70.0,
+        "trigger": true,
+        "sim_human": 60.0
+      }
+    ],
+    "always_b3": 84.0,
+    "rule_trigger": 91.0,
+    "sweep": [
+      {
+        "threshold": 20,
+        "mean_human": 83.0,
+        "min_topic": 10.0,
+        "triggered": 1
+      },
+      {
+        "threshold": 25,
+        "mean_human": 83.0,
+        "min_topic": 10.0,
+        "triggered": 1
+      },
+      {
+        "threshold": 30,
+        "mean_human": 83.0,
+        "min_topic": 10.0,
+        "triggered": 1
+      },
+      {
+        "threshold": 35,
+        "mean_human": 83.0,
+        "min_topic": 10.0,
+        "triggered": 1
+      },
+      {
+        "threshold": 40,
+        "mean_human": 91.0,
+        "min_topic": 60.0,
+        "triggered": 3
+      },
+      {
+        "threshold": 45,
+        "mean_human": 91.0,
+        "min_topic": 60.0,
+        "triggered": 3
+      },
+      {
+        "threshold": 50,
+        "mean_human": 91.0,
+        "min_topic": 60.0,
+        "triggered": 3
+      },
+      {
+        "threshold": 55,
+        "mean_human": 91.0,
+        "min_topic": 60.0,
+        "triggered": 3
+      },
+      {
+        "threshold": 60,
+        "mean_human": 87.0,
+        "min_topic": 60.0,
+        "triggered": 5
+      },
+      {
+        "threshold": 65,
+        "mean_human": 87.0,
+        "min_topic": 60.0,
+        "triggered": 5
+      },
+      {
+        "threshold": 70,
+        "mean_human": 87.0,
+        "min_topic": 60.0,
+        "triggered": 5
+      },
+      {
+        "threshold": 75,
+        "mean_human": 87.0,
+        "min_topic": 60.0,
+        "triggered": 6
+      },
+      {
+        "threshold": 80,
+        "mean_human": 87.0,
+        "min_topic": 60.0,
+        "triggered": 6
+      }
+    ],
+    "loo": [
+      {
+        "threshold": 30,
+        "loo_mean_human": 83.0,
+        "min_topic": 10.0
+      },
+      {
+        "threshold": 35,
+        "loo_mean_human": 83.0,
+        "min_topic": 10.0
+      },
+      {
+        "threshold": 40,
+        "loo_mean_human": 91.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 45,
+        "loo_mean_human": 91.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 50,
+        "loo_mean_human": 91.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 55,
+        "loo_mean_human": 91.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 60,
+        "loo_mean_human": 87.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 65,
+        "loo_mean_human": 87.0,
+        "min_topic": 60.0
+      },
+      {
+        "threshold": 70,
+        "loo_mean_human": 87.0,
+        "min_topic": 60.0
+      }
+    ],
+    "caveat": "这是用人工金标准做的反事实模拟，不是线上 A/B；阈值是在同一批 10 个主题上得到的，尚未在 holdout 主题验证。"
+  }
+}

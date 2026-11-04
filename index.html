@@ -133,12 +133,13 @@
   <div class="cta">
     <a class="btn primary" href="#demos">看样例产出</a>
     <a class="btn" href="portfolio/case-study.md">读产品案例</a>
+    <a class="btn" href="eval/report.html">评测总览</a>
     <a class="btn" href="README.md">技术说明</a>
   </div>
 
   <div class="stats">
     <div class="stat"><div class="num">6 分钟</div><div class="lbl">一次综述（8 篇精读，纯 CPU）</div></div>
-    <div class="stat"><div class="num">6% → 57.5%</div><div class="lbl">10 主题 A/B：检索式规划前 / 后 Precision@10</div></div>
+    <div class="stat"><div class="num">6% → 57.5%</div><div class="lbl">规则口径 A/B（人工金标准见下）</div></div>
     <div class="stat"><div class="num">100%</div><div class="lbl">引用结构正确性（下限保证，非质量分）</div></div>
     <div class="stat"><div class="num">11 项</div><div class="lbl">环境自检全部通过</div></div>
   </div>
@@ -279,12 +280,26 @@
       诚实解读：<b>B0→B1 是稳健的数量级提升</b>；<b>B1→B2→B3 都在噪声里</b>（重复运行波动 ±11~14pp），
       v2 的 62.0% 并不比 v1 的 64.5% 好。更关键的是——<b>on-topic 判定和硬约束用的是同一套关键词，
       指标天然偏向硬约束，看不见"同义表达被误杀"</b>（构念效度问题）。
-      所以 v2 上线不是为了"更准"，而是消除结构性风险；它的收益必须靠人工标注 100 篇才能验证。
-      完整分析：<a href="portfolio/demos/eval-检索A-B评测.md">检索 A/B 报告</a> ·
-      <a href="portfolio/demos/eval-v2软惩罚结果.md">v2 结果</a>。
+      所以 v2 上线不是为了"更准"，而是消除结构性风险。
+      2026-11 用 <b>201 篇人工盲标</b>重新评估：宽口径 B1/B3 打平（84% = 84%，p=1.00），
+      严口径 +11pp 但不显著（p=0.125，10 主题 MDE≈16pp）；碳中和单主题 10% vs 90% 暴露护栏需求。
+      <a href="eval/HUMAN_EVAL.md">人工金标准</a> · <a href="eval/AB_EXPERIMENT.md">统计与实验设计</a> · <a href="eval/report.html">评测总览</a>。
     </p>
 
-    <h3 style="font-size:16px;margin:24px 0 10px">③ 模型对比：3B vs 7B（同一抽取任务）</h3>
+        <h3 style="font-size:16px;margin:24px 0 10px">② 人工金标准（201 篇盲标，2026-11-04）</h3>
+    <div class="grid3">
+      <div class="card"><div class="k">主指标</div><h3>84%</h3><p>线上 B3 人工宽口径 P@10（主题级 CI 66–97）</p></div>
+      <div class="card"><div class="k">代理偏差</div><h3>κ=0.229</h3><p>规则 vs 人工；精确率 98.6% 但召回 45.1%——不是不准，是太窄</p></div>
+      <div class="card"><div class="k">尾部灾难</div><h3>10% vs 90%</h3><p>碳中和单主题：规则口径 35% 看着还行，人工只有 10%</p></div>
+    </div>
+    <p class="sub" style="margin-top:12px">
+      宽口径 B1/B3 打平（84% = 84%，p=1.00）；严口径 +11pp 但不显著（p=0.125）——<b>不宣称 B3 更准</b>。
+      保留 soft 的理由是避免硬约束误杀，不是精度更高。护栏（单主题 &lt;50% 回退）目前只是假设：
+      模拟显示均值 84%→91%，但芯片主题 70%→60%，阈值尚未在 holdout 验证。
+      完整数据：<a href="eval/HUMAN_EVAL.md">HUMAN_EVAL.md</a> · <a href="eval/AB_EXPERIMENT.md">AB_EXPERIMENT.md</a>。
+    </p>
+
+<h3 style="font-size:16px;margin:24px 0 10px">③ 模型对比：3B vs 7B（同一抽取任务）</h3>
     <table>
       <thead><tr><th>模型</th><th>平均耗时/篇</th><th>有效字段率</th><th>结论</th></tr></thead>
       <tbody>
@@ -396,10 +411,10 @@
 <section>
   <div class="wrap">
     <h2>路线图</h2>
-    <p class="sub">已完成 8 项，下一步优先做评测集。</p>
+    <p class="sub">已完成 9 项；下一步补双人标注 κ 与更大主题集。</p>
     <div class="grid3">
       <div class="card"><h3>✅ 已完成</h3><p>多源检索 · 相关性约束（v1 硬淘汰 → v2 软惩罚）· 结构化精读 · 中文综述 · 确定性引用核验 · 网页界面 + 云端切换 · 论文对话 · 文献库对话 · 10 主题 A/B 评测 · 3B vs 7B 模型对比 · 用户测试套件</p></div>
-      <div class="card"><h3>🔜 下一步</h3><p>人工标注 100 篇（验证 v2 召回收益）· 5 人可用性测试（套件已就绪）· 引文滚雪球</p></div>
+      <div class="card"><h3>🔜 下一步</h3><p>双人标注 30 篇算人类-人类 κ · 5 人可用性测试（套件已就绪）· 引文滚雪球</p></div>
       <div class="card"><h3>🎯 产品边界</h3><p>定位是「综述初稿 + 线索发现」，不是替写论文；中文库走本地 PDF 的合规路径，不做爬虫。</p></div>
     </div>
   </div>
