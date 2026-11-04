@@ -7,7 +7,7 @@
 用法：
     .venv\\Scripts\\python.exe eval\\human_eval.py            # 分析（LLM 分数缺则先自动打分）
     .venv\\Scripts\\python.exe eval\\human_eval.py --no-llm   # 跳过 LLM 打分
-输出：eval/HUMAN_EVAL.md + eval/human_eval_results.json（LLM 分数缓存 eval/llm_scores.json）
+输出：eval/HUMAN_EVAL.auto.md + eval/human_eval_results.json（LLM 分数缓存 eval/llm_scores.json）；人工整理版见 HUMAN_EVAL.md
 """
 from __future__ import annotations
 

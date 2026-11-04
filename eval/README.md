@@ -50,9 +50,31 @@
 | **评测有构念效度问题** | on-topic 判定用 `core/domain` 关键词，硬约束也用同一套词——**指标天然偏向硬约束，看不见"同义词误杀"** |
 
 → 所以 v2 上线**不是**因为 precision 提升，而是为了消除"硬淘汰误杀同义表达"的**结构性风险**；
-它的收益需要**人工标注（100 篇）**才能验证，这一条写进下一步，不在作品集里宣称。
+它的收益已用 **201 篇人工盲标**重新评估（2026-11-04）：宽口径 B1/B3 打平、严口径不显著；详见 [HUMAN_EVAL.md](HUMAN_EVAL.md) 与 [AB_EXPERIMENT.md](AB_EXPERIMENT.md)。
 
 详细分析见 [`RESULTS.md`](RESULTS.md) 的"v2 迭代结果"一节。
+
+## 人工金标准（2026-11-04 新增）
+
+201 篇逐篇盲标（隐藏规则判定，防锚定）；统计脚本 [human_eval_stats.py](human_eval_stats.py) 可复现全部区间与检验。
+
+| 指标 | 结果 | 怎么读 |
+|---|---|---|
+| B1 / B3 人工宽口径 P@10 | 84.0% / 84.0%（主题级 CI 66–97） | 宽口径打平；0pp（CI −21～+15，p=1.00） |
+| B1 / B3 严口径 P@10 | 50.0% / 61.0% | +11pp，但 p=0.125、10 主题 MDE≈16pp；不宣称 B3 更准 |
+| 规则 vs 人工 κ | 0.229（0.156–0.308） | 精确率 98.6%、召回 45.1%：不是不准，是太窄 |
+| 7B vs 人工 κ | 0.152（二次加权 0.159） | 只能粗筛，不能当金标准 |
+| 单主题灾难 | 碳中和 B3 10% vs B1 90% | 护栏是假设；简单阈值会误伤芯片（70→60） |
+
+文件：
+- [HUMAN_EVAL.md](HUMAN_EVAL.md)：三层评测结果 + 手工解读
+- [AB_EXPERIMENT.md](AB_EXPERIMENT.md)：CI、配对检验、MDE、护栏反事实、实验设计卡
+- [
+eport.html](report.html)：评测总览（浏览器打开）
+- [../lit_labeler/index.html](../lit_labeler/index.html)：标注工具（盲标交互）
+- [human_eval_results.json](human_eval_results.json) / [lit_labels.json](lit_labels.json)：标注与结果原始数据
+
+> 局限：单人盲标（无人类-人类 κ）；10 主题只能检测约 16–27pp；B0 只标 4 篇，不能与 P@10 直接比较。
 
 ## 模型对比（3B vs 7B）
 
