@@ -68,6 +68,7 @@
 
 文件：
 - [BENCHMARK.md](BENCHMARK.md)：可复跑的中文文献检索小型基准（10 主题 / 201 篇盲标）
+- [ANNOTATION_AB.md](ANNOTATION_AB.md)：标注策略 A/B——LLM 预标注 vs 随机抽样（模拟，2000 次）
 - [HUMAN_EVAL.md](HUMAN_EVAL.md)：三层评测结果 + 手工解读
 - [AB_EXPERIMENT.md](AB_EXPERIMENT.md)：CI、配对检验、MDE、护栏反事实、实验设计卡
 - [

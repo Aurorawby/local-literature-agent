@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "purpose": "标注策略 A/B 模拟：无预算标全量时，随机 vs LLM 分层 vs LLM 预标注",
+    "data": "B3 top10 / 10 topics = 100 papers; 201 human labels; LLM scores cached",
+    "full_gold_p10": 84.0,
+    "reps": 2000,
+    "seed": 42,
+    "caveat": "模拟，不是重新标注；假设人工标签为金标准；LLM 分数为 7B 缓存。"
+  },
+  "budget_per_topic": {
+    "3": {
+      "random": {
+        "mean": 83.97,
+        "bias": -0.03,
+        "mae": 3.24,
+        "rmse": 4.03,
+        "within_5pp": 77.9
+      },
+      "llm_stratified": {
+        "mean": 83.96,
+        "bias": -0.04,
+        "mae": 3.66,
+        "rmse": 4.61,
+        "within_5pp": 72.9
+      },
+      "llm_prelabel_audit": {
+        "mean": 77.71,
+        "bias": -6.29,
+        "mae": 6.29,
+        "rmse": 6.71,
+        "within_5pp": 37.1
+      }
+    },
+    "5": {
+      "random": {
+        "mean": 84.13,
+        "bias": 0.13,
+        "mae": 2.04,
+        "rmse": 2.66,
+        "within_5pp": 95.2
+      },
+      "llm_stratified": {
+        "mean": 84.05,
+        "bias": 0.05,
+        "mae": 2.27,
+        "rmse": 2.89,
+        "within_5pp": 94.0
+      },
+      "llm_prelabel_audit": {
+        "mean": 79.47,
+        "bias": -4.53,
+        "mae": 4.59,
+        "rmse": 5.22,
+        "within_5pp": 64.5
+      }
+    }
+  }
+}

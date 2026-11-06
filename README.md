@@ -191,7 +191,7 @@ copy .env.example .env        # Windows
 | 单主题灾难 | 碳中和 B3 **10%** vs B1 **90%** | 均值会掩盖尾部；护栏是假设，不是已上线结论 |
 
 > 局限：单人盲标（无人类-人类 κ）；B0 只标了前 4 篇，不能与 P@10 直接比较；10 主题样本只能检测约 16–27pp 差异。
-> 完整报告：[eval/HUMAN_EVAL.md](eval/HUMAN_EVAL.md) · 统计与实验设计：[eval/AB_EXPERIMENT.md](eval/AB_EXPERIMENT.md) · 可复跑基准：[eval/BENCHMARK.md](eval/BENCHMARK.md) · 脚本：[eval/human_eval_stats.py](eval/human_eval_stats.py)
+> 完整报告：[eval/HUMAN_EVAL.md](eval/HUMAN_EVAL.md) · 统计与实验设计：[eval/AB_EXPERIMENT.md](eval/AB_EXPERIMENT.md) · 标注策略 A/B：[eval/ANNOTATION_AB.md](eval/ANNOTATION_AB.md) · 可复跑基准：[eval/BENCHMARK.md](eval/BENCHMARK.md) · 脚本：[eval/human_eval_stats.py](eval/human_eval_stats.py)
 
 **④ 模型对比（本地 3B vs 7B，同一抽取任务）**
 
