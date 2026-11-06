@@ -67,6 +67,7 @@
 | 单主题灾难 | 碳中和 B3 10% vs B1 90% | 护栏是假设；简单阈值会误伤芯片（70→60） |
 
 文件：
+- [BENCHMARK.md](BENCHMARK.md)：可复跑的中文文献检索小型基准（10 主题 / 201 篇盲标）
 - [HUMAN_EVAL.md](HUMAN_EVAL.md)：三层评测结果 + 手工解读
 - [AB_EXPERIMENT.md](AB_EXPERIMENT.md)：CI、配对检验、MDE、护栏反事实、实验设计卡
 - [

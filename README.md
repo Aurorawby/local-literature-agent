@@ -40,6 +40,24 @@
 
 ---
 
+## 和通用 agent / skill 的区别
+
+> 能力层面，很多 GitHub skill / MCP 都能“搜论文、总结论文”；这个项目的差异不在模型，而在**流程、可信度和评测**。
+
+| 常见 skill / agent | 这个项目 |
+|---|---|
+| 一个能力（搜索/总结/问答） | 一条流程：找 → 读 → 比 → 写 → 核 |
+| 模型直接给答案 | 参考文献程序生成、数字回查、引用编号核验 |
+| 云端、要 Key、数据出本机 | 本地优先，Ollama / API 双模式 |
+| 跑一次 demo | 201 篇人工盲标 + 统计检验 + 负面结果，可复跑 |
+| 没有产品边界 | PRD、Not-doing、AUDIT、用户测试套件 |
+
+- 人工金标准与统计：[eval/HUMAN_EVAL.md](eval/HUMAN_EVAL.md) · [eval/AB_EXPERIMENT.md](eval/AB_EXPERIMENT.md)
+- 可复跑基准：[eval/BENCHMARK.md](eval/BENCHMARK.md)
+- 一句人话：**“skill 解决‘能不能做’，产品解决‘做完能不能信、能不能复现、边界在哪里’。”**
+
+---
+
 ## 四个能力
 
 | 能力 | 输入 | 输出 | 入口 |
@@ -173,7 +191,7 @@ copy .env.example .env        # Windows
 | 单主题灾难 | 碳中和 B3 **10%** vs B1 **90%** | 均值会掩盖尾部；护栏是假设，不是已上线结论 |
 
 > 局限：单人盲标（无人类-人类 κ）；B0 只标了前 4 篇，不能与 P@10 直接比较；10 主题样本只能检测约 16–27pp 差异。
-> 完整报告：[eval/HUMAN_EVAL.md](eval/HUMAN_EVAL.md) · 统计与实验设计：[eval/AB_EXPERIMENT.md](eval/AB_EXPERIMENT.md) · 可复现脚本：[eval/human_eval_stats.py](eval/human_eval_stats.py)
+> 完整报告：[eval/HUMAN_EVAL.md](eval/HUMAN_EVAL.md) · 统计与实验设计：[eval/AB_EXPERIMENT.md](eval/AB_EXPERIMENT.md) · 可复跑基准：[eval/BENCHMARK.md](eval/BENCHMARK.md) · 脚本：[eval/human_eval_stats.py](eval/human_eval_stats.py)
 
 **④ 模型对比（本地 3B vs 7B，同一抽取任务）**
 
