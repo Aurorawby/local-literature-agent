@@ -25,6 +25,12 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lit_agent.chat import PaperChat, load_paper  # noqa: E402
 from lit_agent.cli import write_output  # noqa: E402
+from lit_agent.audit import (  # noqa: E402
+    build_chat_audit,
+    build_review_audit,
+    render_html as render_audit_html,
+    render_markdown as render_audit_markdown,
+)
 from lit_agent.library import PaperLibrary  # noqa: E402
 from lit_agent.config import PROJECT_ROOT, Settings  # noqa: E402
 from lit_agent.graph import build_graph  # noqa: E402
@@ -257,6 +263,38 @@ def tab_review(settings: Settings) -> None:
         )
         if md_path:
             st.caption(f"已保存到：`{md_path}`")
+
+        audit = build_review_audit(
+            report,
+            merged.get("extracts", []),
+            merged.get("verification", {}),
+            {
+                "topic": topic_saved,
+                "model": f"{settings.provider}/{settings.model}",
+                "queries": merged.get("all_queries", []),
+            },
+        )
+        a1, a2 = st.columns(2)
+        a1.download_button(
+            "🧾 下载引用审计报告（Markdown）",
+            render_audit_markdown(audit),
+            file_name=f"{topic_saved}-引用审计.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+        a2.download_button(
+            "🧾 下载引用审计报告（HTML）",
+            render_audit_html(audit),
+            file_name=f"{topic_saved}-引用审计.html",
+            mime="text/html",
+            use_container_width=True,
+        )
+        st.caption(
+            f"审计结论：**{audit['status']}** · "
+            f"{len(audit.get('claims') or [])} 条带引用句子 · "
+            f"{len(audit.get('issues') or [])} 个待复核项。"
+            "证据为摘要/精读卡片摘录，不是全文页码；页码级证据见「论文对话」。"
+        )
         st.markdown(report)
 
 
@@ -453,6 +491,31 @@ def tab_chat(settings: Settings) -> None:
                     if result.get("sources"):
                         st.caption("依据页码：" + ", ".join(
                             f"p{p}" for p in sorted({s["page"] for s in result["sources"]})))
+                    if result.get("claims"):
+                        audit = build_chat_audit(
+                            paper, result,
+                            {"model": f"{settings.provider}/{settings.model}"},
+                        )
+                        a1, a2 = st.columns(2)
+                        a1.download_button(
+                            "🧾 观点审计（Markdown）",
+                            render_audit_markdown(audit),
+                            file_name=f"{paper.title[:24]}-观点审计.md",
+                            mime="text/markdown",
+                            use_container_width=True,
+                        )
+                        a2.download_button(
+                            "🧾 观点审计（HTML）",
+                            render_audit_html(audit),
+                            file_name=f"{paper.title[:24]}-观点审计.html",
+                            mime="text/html",
+                            use_container_width=True,
+                        )
+                        st.caption(
+                            f"观点审计：{audit['status']} · "
+                            f"{len(audit.get('claims') or [])} 条观点、"
+                            f"{len(audit.get('issues') or [])} 条需人工核对。"
+                        )
                 except Exception as exc:  # noqa: BLE001
                     answer = f"出错：{type(exc).__name__}: {exc}"
                     st.error(answer)

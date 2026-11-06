@@ -66,8 +66,31 @@
 | **单篇精读** | PDF / arXiv / DOI | 结构化中文精读笔记 | `run_paper_read.py` |
 | **论文对话** | 一篇论文 | 多轮问答 / 可写观点卡 / 原文引文 | `run_paper_chat.py` |
 | **文献库对话** | 多篇论文 | 跨文献问答 / 对比表 / 共同研究空白 | `run_library_chat.py` |
+| **引用审计** | 综述 / 观点卡 | 逐条引用 → 来源 → 数字核验；Markdown / HTML / JSON | 自动生成 / 界面下载 |
 
 外加一个 **Streamlit 网页界面**（`app.py`），5 个标签页：综述 / 精读 / 论文对话 / 文献库 / 说明。
+
+## 引用审计报告（新）
+
+综述生成后会自动生成一份**可导出的引用审计报告**（Markdown + 自包含 HTML + JSON）：
+
+- 每条带 `[n]` 的句子 → 对应论文元数据（标题/作者/年份/DOI/链接）；
+- 给出摘要/精读卡片中的**证据摘录**，标出数字回查失败、无效编号、未被引用文献；
+- 可选语义抽检结果单独标注“小模型，仅供参考”；
+- 报告状态：`确定性检查通过` / `需要人工复核`，问题按 high / medium / low 分级。
+
+```bash
+# 默认生成；加 --no-audit 可关闭
+.venv\Scripts\python.exe run_lit_review.py "研究主题" --rounds 1 --papers 2
+# 产物在 output/：<主题>-引用审计.md / .html / .json
+```
+
+- 综述页：Streamlit 里直接下载「引用审计报告（Markdown / HTML）」；
+- 论文对话「提炼可写观点」：生成**页码级**审计（观点 → 原文句子 + 页码）；
+- 示例：[`portfolio/audit-sample.html`](portfolio/audit-sample.html) · [`portfolio/audit-sample.md`](portfolio/audit-sample.md)
+
+> 诚实边界：综述阶段的证据来自**摘要/精读卡片，不是全文页码**；页码级证据只在全文 PDF 的论文对话里。
+> 引用审计能证明“引用/数字/来源结构一致”，不能证明“结论正确”。
 
 ---
 
@@ -259,6 +282,7 @@ src/lit_agent/
   graph.py      综述流水线（LangGraph）
   search.py     学术检索（Crossref / DOAJ / arXiv / OpenAlex）+ 同义词扩展
   verify.py     引用核验（编号有效性 + 数字回查 + 可选语义抽检）
+  audit.py      引用审计报告（逐条 claim → 来源 → 数字/页码，Markdown/HTML/JSON）
   chat.py       论文对话（BM25 + 观点卡 + 引文）
   library.py    文献库对话（跨文献问答 / 对比 / 研究空白）
   reader.py     单篇精读 / 批量对比
@@ -293,6 +317,7 @@ docs/           作品集说明、上游 README 存档
 - [x] 模型对比（3B vs 7B）：有效字段 80%→100%，耗时 2.8×
 - [x] v2 同义词扩展 + 软惩罚（默认 `LIT_CONSTRAINT_MODE=soft`）——**实测未提升 Precision@10，理由是评测构念效度问题**
 - [x] **201 篇人工盲标**（单人；2026-11-04）——宽口径打平、严口径不显著；双人交叉 κ 待补
+- [x] **引用审计报告**（2026-11-06）：逐条引用→来源+数字核验，Markdown/HTML/JSON；对话观点支持页码级审计
 - [ ] 5 人可用性测试（套件已就绪，跑完把结果贴进 `user_test/results/RESULTS.md`）
 - [ ] 引文滚雪球（OpenAlex referenced_works / cited_by）
 

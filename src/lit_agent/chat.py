@@ -453,9 +453,12 @@ class PaperChat:
                 lines.append(f"[{sid}] {sentence}")
         return "\n".join(lines), catalog
 
-    def _render_claims(self, data: dict[str, Any], catalog: dict[str, dict[str, Any]]) -> str:
+    def _render_claims(
+        self, data: dict[str, Any], catalog: dict[str, dict[str, Any]]
+    ) -> tuple[str, list[dict[str, Any]]]:
         lines: list[str] = []
         rendered = 0
+        claims_out: list[dict[str, Any]] = []
         for item in (data.get("claims") or [])[:3]:
             claim = str(item.get("claim", "")).strip()
             if not claim:
@@ -463,6 +466,17 @@ class PaperChat:
             ids = [str(i).strip() for i in (item.get("evidence_ids") or [])]
             quotes = [catalog[i] for i in ids if i in catalog][:3]
             rendered += 1
+            usage = str(item.get("usage", "")).strip()
+            caveat = str(item.get("caveat", "")).strip()
+            claims_out.append({
+                "claim": claim,
+                "quotes": [
+                    {"page": q.get("page"), "sentence": q.get("sentence", "")}
+                    for q in quotes
+                ],
+                "usage": usage,
+                "caveat": caveat,
+            })
             lines.append(f"### 观点 {rendered}")
             lines.append(f"**观点**：{claim}")
             if quotes:
@@ -472,16 +486,14 @@ class PaperChat:
                     lines.append(f"> —— [p{quote['page']}]")
             else:
                 lines.append("**原文依据**：（模型没有给出有效依据编号，请人工核对）")
-            usage = str(item.get("usage", "")).strip()
-            caveat = str(item.get("caveat", "")).strip()
             if usage:
                 lines.append(f"**怎么用**：{usage}")
             if caveat:
                 lines.append(f"**注意**：{caveat}")
             lines.append("")
         if not rendered:
-            return ""
-        return "\n".join(lines).strip()
+            return "", []
+        return "\n".join(lines).strip(), claims_out
 
     def claims(self, focus: str = "", k: int = 10) -> dict[str, Any]:
         """提炼可写进论文的观点（原文依据由程序从句子编号回填，保证是原文）。"""
@@ -501,16 +513,17 @@ class PaperChat:
         )
         try:
             data = self.llm.chat_json(CLAIMS_SYSTEM, user, max_tokens=900, temperature=0.2)
-            answer = self._render_claims(data, catalog)
+            answer, claims_out = self._render_claims(data, catalog)
             if not answer:
                 raise ValueError("没有渲染出观点")
         except (LLMError, ValueError) as exc:
             self.log(f"   ! 观点提炼失败，改用文本模式：{exc}")
             answer = "观点提炼失败，请重试或换更具体的问题。"
+            claims_out = []
 
         self.history.append({"role": "user", "content": f"【提炼观点】{focus or '全文'}"})
         self.history.append({"role": "assistant", "content": answer})
-        return {"answer": answer.strip(), "sources": self._sources(hits)}
+        return {"answer": answer.strip(), "sources": self._sources(hits), "claims": claims_out}
 
     # -------------------------------------------------------------- critique
     def critique(self, focus: str = "") -> dict[str, Any]:

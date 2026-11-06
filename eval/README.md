@@ -18,6 +18,15 @@
 
 输出：`results.json`（原始数据）、`RESULTS.md`（可直接引用的结果表）。
 
+## 引用审计自测（不用模型）
+
+```bash
+.venv\Scripts\python.exe eval/audit_selftest.py
+# ✓ audit selftest passed: review 3 claims / chat 2 claims / issues detected
+```
+
+覆盖：有效/无效引用、数字缺失、未被引用文献、Markdown/HTML 渲染、对话观点页码。
+
 ## 四种条件
 
 | 条件 | 做法 | 对应产品决策 |

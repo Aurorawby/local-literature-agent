@@ -24,6 +24,7 @@ from lit_agent.cli import (  # noqa: E402
     make_logger,
     write_output,
 )
+from lit_agent.audit import build_review_audit, write_audit  # noqa: E402
 from lit_agent.config import Settings  # noqa: E402
 from lit_agent.graph import build_graph  # noqa: E402
 
@@ -41,6 +42,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lang", choices=["zh", "en"], help="输出语言")
     parser.add_argument("--year-from", type=int, dest="year_from", help="检索年份下限，0 表示不限")
     parser.add_argument("--fulltext", action="store_true", help="下载 arXiv 全文精读（更慢）")
+    parser.add_argument("--no-audit", action="store_true", help="不生成引用审计报告（默认生成）")
     parser.add_argument("--quiet", action="store_true", help="少打印中间过程")
     return parser.parse_args()
 
@@ -127,6 +129,25 @@ def main() -> int:
             + (f"，数字可追溯率 {metrics.get('number_rate')}%"
                if metrics.get("number_rate") is not None else "")
         )
+
+    if not args.no_audit:
+        audit = build_review_audit(
+            report,
+            merged.get("extracts", []),
+            verification,
+            {
+                "topic": topic,
+                "model": f"{settings.provider}/{settings.model}",
+                "queries": merged.get("all_queries", []),
+            },
+        )
+        audit_md, audit_html, audit_json = write_audit(audit, f"{topic}-引用审计")
+        print(f"✓ 引用审计：{audit['status']}（{len(audit.get('claims') or [])} 条、"
+              f"{len(audit.get('issues') or [])} 个待复核项）")
+        print(f"  Markdown：{audit_md}")
+        print(f"  HTML：{audit_html}")
+        print(f"  JSON：{audit_json}")
+
     print("=" * 70)
     print()
     print(report[:1500] + ("\n...（完整内容见文件）" if len(report) > 1500 else ""))
