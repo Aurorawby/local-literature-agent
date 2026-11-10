@@ -103,6 +103,11 @@ def sidebar() -> Settings:
         settings.year_from = st.number_input(
             "年份下限（0 = 不限）", min_value=0, max_value=2030, value=BASE.year_from or 0,
         ) or None
+        settings.include_preprints = st.checkbox(
+            "包含 arXiv 预印本（默认关；综述不建议引用预印本）",
+            value=BASE.include_preprints,
+            help="预印本没有经过正式同行评审，不能作为综述的主要引用来源；需要最新进展时再开，并在正文里标明。",
+        )
 
         st.divider()
         st.subheader("质量")
@@ -121,9 +126,10 @@ def sidebar() -> Settings:
 
         st.divider()
         model_ok = settings.provider == "ollama" or bool(settings.api_key)
+        sources = "Crossref + DOAJ" + (" + arXiv（预印本）" if settings.include_preprints else "")
         st.caption(
             f"当前：`{settings.provider}/{settings.model}`\n\n"
-            f"搜索：Crossref + DOAJ + arXiv"
+            f"搜索：{sources}"
         )
         if not model_ok:
             st.error("云端模型缺少 API Key")
@@ -198,8 +204,9 @@ def tab_review(settings: Settings) -> None:
         label_visibility="collapsed",
     )
     st.caption(
-        f"运行前确认：源 = Crossref + DOAJ + arXiv；"
-        f"轮数 = {settings.rounds}；每轮精读 = {settings.papers_per_round} 篇；"
+        f"运行前确认：源 = Crossref + DOAJ"
+        + (" + arXiv 预印本" if settings.include_preprints else "（不含 arXiv 预印本）")
+        + f"；轮数 = {settings.rounds}；每轮精读 = {settings.papers_per_round} 篇；"
         f"年份下限 = {settings.year_from or '不限'}。"
         "检索式会在开始后由模型生成，所以这里先确认范围和规模。"
     )

@@ -52,6 +52,7 @@ class Settings:
     api_key: str = ""
 
     year_from: int | None = 2019
+    include_preprints: bool = False
     mailto: str = ""
     openalex_key: str = ""
     papers_per_round: int = 5
@@ -104,6 +105,7 @@ class Settings:
             api_base=_str("LIT_API_BASE", "https://api.deepseek.com/v1").rstrip("/"),
             api_key=_str("LIT_API_KEY") or _str("DEEPSEEK_API_KEY") or _str("OPENAI_API_KEY"),
             year_from=year_from,
+            include_preprints=_bool("LIT_INCLUDE_PREPRINTS", False),
             mailto=_str("LIT_MAILTO"),
             openalex_key=_str("LIT_OPENALEX_KEY"),
             papers_per_round=max(1, _int("LIT_PAPERS_PER_ROUND", 5)),
@@ -134,7 +136,9 @@ class Settings:
         else:
             model_info += f" @ {self.api_base}"
         years = f"{self.year_from} 年至今" if self.year_from else "不限年份"
-        sources = "Crossref + DOAJ + arXiv"
+        sources = "Crossref + DOAJ"
+        if self.include_preprints:
+            sources += " + arXiv（预印本，默认不纳入参考文献）"
         if self.openalex_key:
             sources += " + OpenAlex"
         return (

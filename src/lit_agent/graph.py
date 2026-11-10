@@ -282,7 +282,7 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
                 found += try_source("DOAJ", lambda q: doaj_search(
                     q, page_size=settings.openalex_per_query, year_from=settings.year_from,
                     http=http), query)
-            if "arXiv" not in disabled:
+            if "arXiv" not in disabled and settings.include_preprints:
                 found += try_source("arXiv", lambda q: arxiv_search(
                     q, max_results=settings.arxiv_per_query, http=http), query)
             if settings.openalex_key and "OpenAlex" not in disabled:
@@ -292,8 +292,10 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
             if i < len(state.queries) - 1:
                 time.sleep(3.0)  # arXiv 官方建议两次请求间隔 3 秒
 
+        if not settings.include_preprints:
+            log("   （默认不检索 arXiv 预印本；综述引用只用正式发表来源）")
         if not settings.openalex_key:
-            log("   （未配置 LIT_OPENALEX_KEY，已跳过 OpenAlex；Crossref+DOAJ+arXiv 已覆盖）")
+            log("   （未配置 LIT_OPENALEX_KEY，已跳过 OpenAlex；Crossref+DOAJ 已覆盖）")
 
         log(f"   共拿到 {len(found)} 条结果，去重 ...")
         unique = dedupe(found)
@@ -339,16 +341,18 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
         else:
             catalog = "\n".join(
                 f"[{i + 1}] {c.get('title', '')[:110]} | {c.get('year') or '?'} | "
-                f"{c.get('venue', '')[:40]}"
+                f"{c.get('venue', '')[:40]} | {c.get('source', '')} | "
+                f"引用 {c.get('citations', 0)} | {(c.get('abstract') or '')[:240]}"
                 for i, c in enumerate(candidates)
             )
             system = (
                 "你是文献筛选助手。根据用户的研究主题，从候选论文里挑出最相关的论文。"
-                f"规则：只挑 {want} 篇；论文必须**同时**满足两个条件："
+                f"规则：只挑 {want} 篇；论文必须同时满足两个条件："
                 f"① 讨论核心概念（{'、'.join(state.core_terms) or state.topic}）；"
                 f"② 落在应用领域内（{'、'.join(state.domain_terms) or state.topic}）。"
-                "只涉及核心概念但领域完全无关的论文（例如讲大模型但和金融无关）不要选；"
-                "优先原始研究/综述；"
+                "只涉及核心概念但领域完全无关的论文不要选；"
+                "优先正式发表的期刊论文/综述/原创研究；"
+                "优先近五年、有 DOI、期刊来源清楚、摘要与主题直接相关的论文；"
                 "只输出 JSON：{\"selected\": [编号, 编号, ...]}，编号从 1 开始。"
             )
             user = f"研究主题：{state.topic}\n\n候选论文：\n{catalog}"
