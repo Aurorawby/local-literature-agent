@@ -197,11 +197,20 @@ def tab_review(settings: Settings) -> None:
         "研究主题", placeholder="例如：大语言模型在金融风控中的应用",
         label_visibility="collapsed",
     )
+    st.caption(
+        f"运行前确认：源 = Crossref + DOAJ + arXiv；"
+        f"轮数 = {settings.rounds}；每轮精读 = {settings.papers_per_round} 篇；"
+        f"年份下限 = {settings.year_from or '不限'}。"
+        "检索式会在开始后由模型生成，所以这里先确认范围和规模。"
+    )
+    confirm = st.checkbox("我已确认主题和检索范围", value=False, key="review_confirm")
     run = col2.button("开始生成", type="primary", use_container_width=True)
 
     if run:
         if not topic.strip():
             st.error("请先输入研究主题")
+        elif not confirm:
+            st.error("先勾选「我已确认主题和检索范围」再开始。")
         elif settings.provider == "openai" and not settings.api_key:
             st.error("云端模型需要 API Key，请在左侧填写")
         else:
@@ -222,6 +231,24 @@ def tab_review(settings: Settings) -> None:
     topic_saved = st.session_state.get("topic", "research")
     st.divider()
     metric_row(merged)
+
+    with st.expander("工具轨迹：每一步看到了什么", expanded=False):
+        queries = merged.get("all_queries") or []
+        candidates = merged.get("candidates") or []
+        selected = merged.get("selected") or []
+        extracts = merged.get("extracts") or []
+        metrics = (merged.get("verification") or {}).get("metrics") or {}
+        st.markdown("**① 检索式**（模型规划，代码执行）")
+        st.write("；".join(queries) if queries else "—")
+        st.markdown("**② 候选 → 筛选 → 精读**")
+        st.write(f"候选 {len(candidates)} 篇 → 筛选 {len(selected)} 篇 → 精读 {len(extracts)} 篇")
+        st.markdown("**③ 引用核验**（程序检查）")
+        st.write(
+            f"带引用句子 {metrics.get('sentences_with_citation', '—')} 条；"
+            f"引用标记 {metrics.get('valid_citation_marks', '—')} 个；"
+            f"数字回查失败 {metrics.get('numbers_missing', '—')} 个；"
+            f"未被引用参考文献 {metrics.get('uncited_reference_count', '—')} 篇。"
+        )
 
     report = merged.get("report", "")
     md_path = st.session_state.get("md_path")
@@ -294,6 +321,36 @@ def tab_review(settings: Settings) -> None:
             f"{len(audit.get('claims') or [])} 条带引用句子 · "
             f"{len(audit.get('issues') or [])} 个待复核项。"
             "证据为摘要/精读卡片摘录，不是全文页码；页码级证据见「论文对话」。"
+        )
+
+        mentor_lines = [
+            "# 给导师看的综述初稿",
+            "",
+            f"- 主题：{topic_saved}",
+            f"- 引用审计结论：{audit.get('status', '')}",
+            f"- 待复核项：{len(audit.get('issues') or [])} 个",
+            "",
+            "> 说明：这是初稿 + 核对线索，不是最终论文；引用和数字需要你确认。",
+            "",
+            report,
+            "",
+            "## 待复核项",
+        ]
+        issues = audit.get("issues") or []
+        if issues:
+            for issue in issues[:30]:
+                mentor_lines.append(
+                    f"- [{issue.get('severity', '')}] {issue.get('type', '')}："
+                    f"{issue.get('sentence', '')} {issue.get('detail', '')}".strip()
+                )
+        else:
+            mentor_lines.append("- 无结构性待复核项；仍需人工核对结论和原文。")
+        st.download_button(
+            "下载给导师核对版（Markdown）",
+            "\n".join(mentor_lines),
+            file_name=f"{topic_saved}-给导师核对版.md",
+            mime="text/markdown",
+            use_container_width=True,
         )
 
         claims = audit.get("claims") or []
