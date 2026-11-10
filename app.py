@@ -295,6 +295,65 @@ def tab_review(settings: Settings) -> None:
             f"{len(audit.get('issues') or [])} 个待复核项。"
             "证据为摘要/精读卡片摘录，不是全文页码；页码级证据见「论文对话」。"
         )
+
+        claims = audit.get("claims") or []
+        if claims:
+            st.markdown("---")
+            st.subheader("逐条核对引用")
+            st.caption("每条带引用的句子都需要你看一眼；勾选表示你已核对，未勾选的不会被标成已核对。")
+            checked = []
+            for idx, claim in enumerate(claims):
+                sentence = (claim.get("sentence") or "").strip()
+                flags = []
+                if claim.get("missing_numbers"):
+                    flags.append("数字待回原文")
+                if claim.get("invalid_citations"):
+                    flags.append("引用编号无效")
+                suffix = (" · " + " · ".join(flags)) if flags else ""
+                ok = st.checkbox(
+                    f"{idx + 1}. {sentence[:110]}{suffix}",
+                    key=f"audit_check_{topic_saved}_{idx}",
+                )
+                checked.append(bool(ok))
+            done = sum(checked)
+            st.progress(done / len(checked), text=f"已核对 {done}/{len(checked)} 条")
+            if done < len(checked):
+                st.caption("还有未核对条目。导出记录会保留每条的真实状态，不会替你标成已核对。")
+
+            record_lines = [
+                "# 人工核对记录",
+                "",
+                f"- 主题：{topic_saved}",
+                f"- 审计结论：{audit.get('status', '')}",
+                f"- 已核对：{done}/{len(checked)}",
+                "",
+                "| # | 句子 | 引用 | 状态 | 备注 |",
+                "|---|---|---|---|---|",
+            ]
+            for idx, (claim, ok) in enumerate(zip(claims, checked), start=1):
+                sentence = (claim.get("sentence") or "").replace("|", "\\|").strip()
+                cites = "、".join(f"[{i}]" for i in (claim.get("citations") or [])) or "—"
+                note = "；".join(
+                    filter(None, [
+                        "数字待回原文" if claim.get("missing_numbers") else "",
+                        "引用编号无效" if claim.get("invalid_citations") else "",
+                    ])
+                ) or "—"
+                record_lines.append(
+                    f"| {idx} | {sentence[:160]} | {cites} | {'已核对' if ok else '待核对'} | {note} |"
+                )
+            record_lines += [
+                "",
+                "> 说明：这是人工核对记录，不是模型自评。未核对条目需要回原文确认。",
+            ]
+            st.download_button(
+                "下载人工核对记录（Markdown）",
+                "\n".join(record_lines),
+                file_name=f"{topic_saved}-人工核对记录.md",
+                mime="text/markdown",
+                use_container_width=True,
+            )
+
         st.markdown(report)
 
 
