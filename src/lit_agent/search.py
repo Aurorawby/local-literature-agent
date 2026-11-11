@@ -281,6 +281,7 @@ def openalex_search(query: str, *, per_page: int = 20, year_from: int | None = N
 # arXiv
 # --------------------------------------------------------------------------
 _ATOM = "{http://www.w3.org/2005/Atom}"
+_ARX = "{http://arxiv.org/schemas/atom}"
 
 
 def _arxiv_query(terms: str) -> str:
@@ -327,6 +328,9 @@ def arxiv_search(query: str, *, max_results: int = 20,
         for link in entry.findall(f"{_ATOM}link"):
             if link.get("title") == "pdf" or link.get("type") == "application/pdf":
                 pdf_url = link.get("href", "")
+        # 作者在 arXiv 上补填的正式发表信息：综述引用必须落在期刊/会议版本上
+        arxiv_doi = _clean(entry.findtext(f"{_ARX}doi"))
+        journal_ref = _clean(entry.findtext(f"{_ARX}journal_ref"))
         papers.append(
             Paper(
                 paper_id=f"ARXIV:{arxiv_id}",
@@ -334,12 +338,14 @@ def arxiv_search(query: str, *, max_results: int = 20,
                 abstract=abstract[:4000],
                 authors=[a for a in authors if a][:20],
                 year=year,
-                venue="arXiv",
+                venue=journal_ref or "arXiv",
                 url=f"https://arxiv.org/abs/{arxiv_id}",
                 pdf_url=pdf_url or f"https://arxiv.org/pdf/{arxiv_id}",
+                doi=arxiv_doi,
                 citations=0,
                 source="arxiv",
-                type="preprint",
+                # 作者已补填期刊/会议信息说明已发表，不再算严格意义的预印本
+                type="article" if (arxiv_doi or journal_ref) else "preprint",
             )
         )
     return [p for p in papers if p.title]
@@ -481,6 +487,18 @@ def dedupe(papers: Iterable[Paper]) -> list[Paper]:
             seen.setdefault(k, hit)
         if not hit.abstract and p.abstract:
             hit.abstract = p.abstract
+        # 预印本撞上正式发表版本（Crossref/OpenAlex 收录）时，改用正式版的出处——
+        # 综述引用必须落在期刊/会议版本上，不能引 arXiv 页面
+        if hit.source == "arxiv" and p.source in {"crossref", "openalex"} and (p.doi or p.venue):
+            hit.source = p.source
+            hit.type = p.type or "article"
+            if p.venue:
+                hit.venue = p.venue
+            if p.doi:
+                hit.doi = p.doi
+                hit.url = f"https://doi.org/{p.doi}"
+            if p.year:
+                hit.year = p.year
         if not hit.doi and p.doi:
             hit.doi = p.doi
             hit.url = p.url
@@ -549,6 +567,10 @@ def relevance_score(paper: Paper, topic_terms: list[str],
             score += domain_penalty
 
     score += min(4.0, math.log1p(paper.citations) * 0.6)
+
+    # 综述引用优先正式发表的期刊/会议版本；纯预印本排序靠后
+    if paper.type == "preprint" or (paper.source == "arxiv" and not paper.doi):
+        score -= 1.5
 
     if paper.year:
         age = max(0, date.today().year - paper.year)

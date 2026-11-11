@@ -166,7 +166,45 @@ class ChatLLM:
                     f"请先运行：ollama pull {self.settings.model}"
                 )
             return f"Ollama 正常，模型 {self.settings.model} 已就绪"
-        return f"使用 OpenAI 兼容接口：{self.settings.api_base} / {self.settings.model}"
+        # 云端：真的调一次接口，尽早暴露 Key / 模型名 / 余额问题，
+        # 避免一路静默降级到最后才出现"综述合成失败"的废稿。
+        if not self.settings.api_key:
+            raise LLMError("云端模型缺少 API Key，请在左侧填写")
+        models = self._list_models()
+        if models and self.settings.model not in models:
+            raise LLMError(
+                f"模型名 `{self.settings.model}` 在 {self.settings.api_base} 上不存在。\n"
+                f"该接口可用的模型：{', '.join(models[:12])}\n"
+                "DeepSeek 常用的是 deepseek-chat / deepseek-reasoner / deepseek-flash。"
+            )
+        return f"云端接口可用：{self.settings.api_base} / {self.settings.model}"
+
+    def _list_models(self) -> list[str]:
+        """拿到服务商的模型列表；接口不存在时返回空列表（不做名单校验，让后续调用自己报错）。"""
+        try:
+            r = self._client.get(
+                f"{self.settings.api_base}/models",
+                headers={"Authorization": f"Bearer {self.settings.api_key}"},
+            )
+        except Exception as exc:  # noqa: BLE001
+            raise LLMError(f"连不上模型接口 {self.settings.api_base}：{exc}") from exc
+        if r.status_code in (401, 403):
+            raise LLMError(
+                f"API Key 无效或没有权限（{r.status_code}）。请检查左侧填写的 API Key 是否正确。"
+            )
+        if r.status_code == 402:
+            raise LLMError("API 账户余额不足（402），请到服务商后台充值后再试。")
+        if r.status_code >= 400:
+            return []
+        try:
+            data = r.json()
+        except ValueError:
+            return []
+        ids = []
+        for item in data.get("data", []) if isinstance(data, dict) else []:
+            if isinstance(item, dict) and item.get("id"):
+                ids.append(str(item["id"]))
+        return ids
 
     # -------------------------------------------------------------- internal
     def _ollama(
@@ -225,4 +263,10 @@ class ChatLLM:
         if r.status_code >= 400:
             raise LLMError(f"API 返回 {r.status_code}: {r.text[:300]}")
         data = r.json()
-        return data["choices"][0]["message"]["content"]
+        try:
+            content = data["choices"][0]["message"]["content"] or ""
+        except (KeyError, IndexError, TypeError):
+            raise LLMError(f"API 返回了无法解析的结构：{str(data)[:300]}") from None
+        if not content.strip():
+            raise LLMError("模型返回了空内容（可能输出被截断或触发了内容审查）")
+        return content

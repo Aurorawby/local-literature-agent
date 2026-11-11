@@ -119,7 +119,11 @@ def _english_query(text: str) -> str:
     text = _CJK_RE.sub(" ", text or "")
     text = re.sub(r"[^A-Za-z0-9\-\s]", " ", text)
     text = " ".join(text.split())
-    return text if len(text.split()) >= 2 else ""
+    words = text.split()
+    if len(words) >= 2:
+        return text
+    # 单个主题词（如 tiltrotor）也是合法检索式；太短的单词大概率是噪声
+    return text if len(words) == 1 and len(words[0]) >= 5 else ""
 
 
 def _paper_ids(paper: Paper | dict) -> list[str]:
@@ -195,9 +199,14 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
                 if c and c.strip() and re.search(r"[A-Za-z]", c)
             ]
             zh_query = _normalize_query(data.get("zh_query") or "")
-        except (LLMError, ValueError) as exc:
-            log(f"   ! 检索式规划失败，改用原主题检索：{exc}")
+        except ValueError as exc:
+            log(f"   ! 检索式规划输出无法解析，改用原主题检索：{exc}")
             queries, keywords, zh_query, core_terms, domain_terms = [], [state.topic], "", [], []
+        except LLMError as exc:
+            # 模型接口坏了（Key 无效 / 模型名不存在 / 余额不足 / 断网）：
+            # 继续跑只会产出"综述合成失败"的废稿，这里直接中断并给出明确原因。
+            log(f"   ! 检索式规划失败，终止本次运行：{exc}")
+            raise
 
         # 模型没给出可用的英文检索式时兜底：用核心概念 / 原主题
         if not queries:
@@ -336,39 +345,46 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
             log("   ! 本轮没有候选论文")
             return {"selected": []}
 
-        if len(candidates) <= want:
-            selected = candidates
+        # 无论候选多少篇都让模型过一遍：候选数量不多时最容易混进无关论文
+        # （检索源对中文检索式是模糊匹配，常带回一堆只沾边的论文）。
+        catalog = "\n".join(
+            f"[{i + 1}] {c.get('title', '')[:110]} | {c.get('year') or '?'} | "
+            f"{c.get('venue', '')[:40]}{'（预印本）' if c.get('type') == 'preprint' else ''} | "
+            f"{c.get('source', '')} | "
+            f"引用 {c.get('citations', 0)} | {(c.get('abstract') or '')[:240]}"
+            for i, c in enumerate(candidates)
+        )
+        system = (
+            "你是文献筛选助手。根据用户的研究主题，从候选论文里挑出真正相关的论文。"
+            f"规则：最多挑 {want} 篇，**宁缺毋滥**，相关论文不足 {want} 篇就只返回真正相关的；"
+            "论文必须同时满足两个条件："
+            f"① 讨论核心概念（{'、'.join(state.core_terms) or state.topic}）；"
+            f"② 落在应用领域内（{'、'.join(state.domain_terms) or state.topic}）。"
+            "只涉及核心概念但领域完全无关的论文不要选；"
+            "**优先经同行评审的期刊/会议论文，优先领域内公认的期刊**（如 IEEE/Elsevier/Springer/AIAA/"
+            "各学会会刊等）；标注（预印本）的 arXiv 论文原则上不选，除非确实找不到正式发表版本、"
+            "且必须了解最新进展，最多选 1-2 篇；"
+            "优先近五年、有 DOI、期刊来源清楚、摘要与主题直接相关的论文；"
+            "如果所有候选都与主题无关，返回空列表 []。"
+            "只输出 JSON：{\"selected\": [编号, 编号, ...]}，编号从 1 开始。"
+        )
+        user = f"研究主题：{state.topic}\n\n候选论文：\n{catalog}"
+        try:
+            data = llm.chat_json(system, user, max_tokens=120)
+            if "selected" not in data:
+                raise ValueError("模型没有给出 selected 字段")
+            indices = [int(i) - 1 for i in (data.get("selected") or [])]
+            picked = [candidates[i] for i in indices if 0 <= i < len(candidates)]
+        except (LLMError, ValueError, TypeError) as exc:
+            log(f"   ! 模型筛选失败，改用规则排序：{exc}")
+            selected = candidates[:want]
         else:
-            catalog = "\n".join(
-                f"[{i + 1}] {c.get('title', '')[:110]} | {c.get('year') or '?'} | "
-                f"{c.get('venue', '')[:40]} | {c.get('source', '')} | "
-                f"引用 {c.get('citations', 0)} | {(c.get('abstract') or '')[:240]}"
-                for i, c in enumerate(candidates)
-            )
-            system = (
-                "你是文献筛选助手。根据用户的研究主题，从候选论文里挑出最相关的论文。"
-                f"规则：只挑 {want} 篇；论文必须同时满足两个条件："
-                f"① 讨论核心概念（{'、'.join(state.core_terms) or state.topic}）；"
-                f"② 落在应用领域内（{'、'.join(state.domain_terms) or state.topic}）。"
-                "只涉及核心概念但领域完全无关的论文不要选；"
-                "优先正式发表的期刊论文/综述/原创研究；"
-                "优先近五年、有 DOI、期刊来源清楚、摘要与主题直接相关的论文；"
-                "只输出 JSON：{\"selected\": [编号, 编号, ...]}，编号从 1 开始。"
-            )
-            user = f"研究主题：{state.topic}\n\n候选论文：\n{catalog}"
-            try:
-                data = llm.chat_json(system, user, max_tokens=120)
-                indices = [int(i) - 1 for i in (data.get("selected") or [])]
-                picked = [candidates[i] for i in indices if 0 <= i < len(candidates)]
-                if not picked:
-                    raise ValueError("模型没有选出有效编号")
-                # 用规则排序补齐，保证数量
-                picked_ids = {id(x) for x in picked}
-                rest = [c for c in candidates if id(c) not in picked_ids]
-                selected = (picked + rest)[:want]
-            except (LLMError, ValueError, TypeError) as exc:
-                log(f"   ! 模型筛选失败，改用规则排序：{exc}")
-                selected = candidates[:want]
+            # 模型明确筛掉的不相关论文，不再用规则排序补回来
+            if picked:
+                selected = picked[:want]
+            else:
+                log("   ! 模型认为本轮候选都与主题无关，本轮不精读任何论文")
+                selected = []
 
         for i, paper in enumerate(selected, 1):
             log(f"   [{i}] {paper.get('title', '')[:80]} ({paper.get('year') or '?'}, "
@@ -425,6 +441,8 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
                 "url": paper.get("url", ""),
                 "authors": paper.get("authors", []),
                 "citations": paper.get("citations", 0),
+                # 保留文献类型：报告里要给预印本打标（未经同行评审）
+                "type": paper.get("type", "article"),
                 # 保留摘要，供"引用核验"环节作为证据使用
                 "abstract": abstract[:1200],
             })
@@ -498,19 +516,24 @@ def build_graph(settings: Settings, llm: ChatLLM, log: Log = print):
 
         try:
             draft = llm.chat(system, user, max_tokens=1800, temperature=0.3)
-            # 小模型有时会一个引用都不写，这里强制补一次
-            if not re.search(r"\[\d+\]", draft):
-                log("   ! 正文完全没有 [编号] 引用，要求模型重写一次 ...")
-                draft = llm.chat(
-                    system,
-                    user + "\n\n注意：上一次生成的正文没有任何 [编号] 引用。"
-                           "请重写，并在每个具体事实、方法、数字后面标注 [编号]。",
-                    max_tokens=1800,
-                    temperature=0.2,
-                )
         except LLMError as exc:
             log(f"   ! 综述合成失败：{exc}")
-            draft = "（综述合成失败，请查看下方论文卡片。）"
+            draft = f"（综述合成失败：{exc}）"
+        else:
+            # 小模型有时会一个引用都不写，这里强制补一次；
+            # 补写失败时保留第一版正文，不要把已经生成的内容扔掉
+            if not re.search(r"\[\d+\]", draft):
+                log("   ! 正文完全没有 [编号] 引用，要求模型重写一次 ...")
+                try:
+                    draft = llm.chat(
+                        system,
+                        user + "\n\n注意：上一次生成的正文没有任何 [编号] 引用。"
+                               "请重写，并在每个具体事实、方法、数字后面标注 [编号]。",
+                        max_tokens=1800,
+                        temperature=0.2,
+                    )
+                except LLMError as exc:
+                    log(f"   ! 补引用重写失败，保留第一版正文：{exc}")
         log(f"   耗时 {time.perf_counter() - started:.1f}s，正文 {len(draft)} 字")
         return {"draft": draft.strip()}
     # --------------------------------------------------- verify (引用核验)
@@ -603,6 +626,10 @@ def _render_report(settings: Settings, state: ReviewState) -> str:
     )
     lines.append("")
 
+    if state.draft.startswith("（综述合成失败"):
+        lines.append("> ⚠️ **本次运行的综述正文没有生成**（模型调用失败，具体原因见正文第一行）。"
+                     "下面只有文献卡片和参考文献，正文需要等模型恢复后重新生成。")
+        lines.append("")
     lines.append("## 一、综述正文")
     lines.append("")
     lines.append(state.draft or "（无内容）")
@@ -613,9 +640,12 @@ def _render_report(settings: Settings, state: ReviewState) -> str:
     lines.append("| # | 论文 | 年份 | 来源 | 方法 | 主要发现 |")
     lines.append("|---|------|------|------|------|----------|")
     for e in extracts:
+        venue = e.get("venue") or "—"
+        if e.get("type") == "preprint" and not e.get("doi"):
+            venue = "arXiv（预印本）"
         lines.append(
             f"| [{e['index']}] | {_md_cell(e.get('title'), 46)} | {e.get('year') or '—'} | "
-            f"{_md_cell(e.get('venue'), 26)} | {_md_cell(e.get('method'), 34)} | "
+            f"{_md_cell(venue, 26)} | {_md_cell(e.get('method'), 34)} | "
             f"{_md_cell(e.get('findings'), 44)} |"
         )
     lines.append("")
@@ -641,7 +671,11 @@ def _render_report(settings: Settings, state: ReviewState) -> str:
             doi=e.get("doi", ""),
             url=e.get("url", ""),
         )
-        lines.append(f"[{e['index']}] {paper.reference()}")
+        ref = paper.reference()
+        # 没有正式发表出处的预印本：显式打标，提醒引用者回溯期刊/会议版本
+        if (e.get("type") == "preprint" or e.get("venue") == "arXiv") and not e.get("doi"):
+            ref += "（预印本，未经同行评审；如已正式发表，请改引期刊/会议版本）"
+        lines.append(f"[{e['index']}] {ref}")
     lines.append("")
 
     # 五、引用核验（有结果才渲染）
@@ -655,8 +689,11 @@ def _render_report(settings: Settings, state: ReviewState) -> str:
         "",
         "### 方法与局限说明",
         "",
-        f"- **检索来源**：Crossref（期刊）、DOAJ（开放获取期刊）、arXiv（预印本）"
-        + ("、OpenAlex（全学科）" if settings.openalex_key else ""),
+        f"- **检索来源**：Crossref（期刊）、DOAJ（开放获取期刊）"
+        + ("、arXiv（预印本）" if settings.include_preprints else "")
+        + ("、OpenAlex（全学科）" if settings.openalex_key else "")
+        + ("；预印本仅在无法对应正式发表版本时保留并在参考文献中标注"
+           if settings.include_preprints else ""),
         f"- **年份范围**：{settings.year_from or '不限'} 至今",
         f"- **检索式**：{'；'.join(state.all_queries)}",
         f"- **流程**：检索 → 相关性筛选 → 逐篇结构化精读 → 主题合成 → 反思补检"

@@ -87,7 +87,11 @@ def sidebar() -> Settings:
             preset = st.selectbox("服务商", list(presets))
             default_base, default_model = presets[preset]
             settings.api_base = st.text_input("API 地址", default_base)
-            settings.model = st.text_input("模型名", default_model)
+            settings.model = st.text_input(
+                "模型名", default_model,
+                help="模型名必须和服务商后台完全一致，填错会导致所有 AI 步骤失败。\n"
+                     "DeepSeek 可用：deepseek-chat、deepseek-reasoner、deepseek-flash",
+            )
             settings.api_key = st.text_input(
                 "API Key", value=BASE.api_key, type="password",
                 help="只保存在本次会话，不会写进 .env（想永久保存就改 .env）",
@@ -100,9 +104,14 @@ def sidebar() -> Settings:
         settings.rounds = st.slider("研究轮数", 1, 3, BASE.rounds,
                                     help="1 快 / 2 标准 / 3 深挖")
         settings.papers_per_round = st.slider("每轮精读篇数", 2, 8, BASE.papers_per_round)
-        settings.year_from = st.number_input(
+        year_value = st.number_input(
             "年份下限（0 = 不限）", min_value=0, max_value=2030, value=BASE.year_from or 0,
-        ) or None
+        )
+        if 0 < year_value < 1900 or year_value > datetime.now().year:
+            st.caption(f"年份下限应在 1900–{datetime.now().year} 之间（0 = 不限），"
+                       f"当前填的 {year_value} 已忽略。")
+            year_value = 0
+        settings.year_from = year_value or None
         settings.include_preprints = st.checkbox(
             "包含 arXiv 预印本（默认关；综述不建议引用预印本）",
             value=BASE.include_preprints,
@@ -162,16 +171,20 @@ def run_review(settings: Settings, topic: str) -> dict:
     merged: dict = {}
     started = time.perf_counter()
 
-    log(llm.ping())
-    graph = build_graph(settings, llm, log)
-    for event in graph.stream(
-        {"topic": topic, "language": settings.language}, {"recursion_limit": 200}
-    ):
-        for _node, update in event.items():
-            if isinstance(update, dict):
-                merged.update(update)
-                if update.get("draft"):
-                    status.update(label="正在核验引用 ...")
+    try:
+        log(llm.ping())
+        graph = build_graph(settings, llm, log)
+        for event in graph.stream(
+            {"topic": topic, "language": settings.language}, {"recursion_limit": 200}
+        ):
+            for _node, update in event.items():
+                if isinstance(update, dict):
+                    merged.update(update)
+                    if update.get("draft"):
+                        status.update(label="正在核验引用 ...")
+    except Exception:
+        status.update(label="运行中断（原因见下方错误提示）", state="error", expanded=False)
+        raise
 
     merged["_elapsed"] = time.perf_counter() - started
     status.update(label=f"完成，用时 {merged['_elapsed']:.0f} 秒", state="complete", expanded=False)
